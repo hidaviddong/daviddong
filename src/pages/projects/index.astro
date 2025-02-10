@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const projects = await getCollection("projects");
+---
+
+<Layout>
+  <main>
+    <ul class="flex flex-col gap-1.5">
+      {
+        projects.map((project) => (
+          <li>
+            <a
+              href={`/projects/${project.id}`}
+              class="group flex justify-between gap-3"
+            >
+              <span class="group-hover:underline">{project.data.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>
