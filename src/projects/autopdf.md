@@ -1,6 +1,7 @@
 ---
 title: "AutoPDF"
 date: "2025"
+type: "个人"
 ---
 
 通过对话，生成任意 PDF 的网页。
