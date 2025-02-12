@@ -13,6 +13,6 @@ type: "个人"
 - 打开工具栏菜单，然后选择 Comment 或快捷方式中的注释气泡图标。
 - 鼠标移动到的 DOM 节点会突出显示，再次点击可以留下评论。
 
-![main](../assets/comments/comments.gif)
+![comments](../assets/comments/comments.gif)
 
 <center>Comments</center>

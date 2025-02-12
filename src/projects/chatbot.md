@@ -12,14 +12,14 @@ AI 诊疗助手是一款医疗场景的智能辅助工具，利用检索增强�
 
 <center>首页</center>
 
-![main](../assets/chatbot/dialog.webp)
+![dialog](../assets/chatbot/dialog.webp)
 
 <center>对话</center>
 
-![main](../assets/chatbot/image.webp)
+![image](../assets/chatbot/image.webp)
 
 <center>多模态</center>
 
-![main](../assets/chatbot/literature.webp)
+![literature](../assets/chatbot/literature.webp)
 
 <center>文献检索</center>
