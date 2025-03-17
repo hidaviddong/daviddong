@@ -74,7 +74,7 @@ Frontend Developer (Intern) #h(1fr) Hong Kong \
 Frontend Developer (Full Time)#h(1fr) Changsha, China \
 - Led development of an #link("https://daviddong.me/projects/chatbot")[AI-powered medical assistant], building React application architecture with SSE streaming, user role management, and literature search features.
 - Collaborated across departments to develop the #link("http://www.eeg-x.com/")[EEG-X intelligent EEG analysis platform], designing high-precision EEG waveform visualization components with ECharts.
-- Developed a #link("https://daviddong.me/projects/data-visualization")[data visualization project] using Three.js to build interactive 3D office scenes, reducing loading time by 50% through model compression and rendering optimization.
+- Developed a #link("https://daviddong.me/projects/data-visualization")[data visualization project] using Three.js, Blender to build interactive 3D office scenes, reducing loading time by 50% through model compression and rendering optimization.
 
 *Tencent Music Entertainment* #h(1fr) May 2022 - Oct 2022 \
 Frontend Developer (Intern) #h(1fr) Shenzhen, China \
@@ -142,7 +142,7 @@ Bachelor of Science in Construction Environment and Energy Application Engineeri
 
 - 跨部门协作开发#link("http://www.eeg-x.com/")[EEG-X智能脑电分析平台], 使用ECharts设计高精度脑电波形可视化组件, 实现波形高度自适应和时间线标注功能,平台已应用于癫痫诊断, 提高诊断准确率40%, 缩短分析时间60%。
 
-- 负责智慧园区数据#link("https://daviddong.me/projects/data-visualization")[可视化系统开发], 运用Three.js构建交互式3D办公场景, 通过模型压缩和渲染优化技术, 将场景加载时间减少50%, 同时保持高质量视觉效果。
+- 负责智慧园区数据#link("https://daviddong.me/projects/data-visualization")[可视化系统开发], 运用Three.js 和 Blender构建交互式3D办公场景, 通过模型压缩和渲染优化技术, 将场景加载时间减少50%, 同时保持高质量视觉效果。
 
 *腾讯音乐娱乐集团* #h(1fr) 2022年5月 - 2022年10月  \
 前端开发工程师（实习） #h(1fr) 深圳 \
