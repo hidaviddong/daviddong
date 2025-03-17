@@ -56,7 +56,7 @@
 
 == Skills
 #chiline()
-- *Frontend:* Proficient in JavaScript/TypeScript, React, Vue.js ecosystems, and full-stack frameworks like Next.js and Nuxt.js. Experienced with state management tools and performance optimization.
+- *Frontend:* Proficient in JavaScript/TypeScript, React, Vue.js ecosystems, and full-stack frameworks like Next.js. Experienced with state management tools and performance optimization.
 - *Backend:* Basic knowledge of Node.js and Express for building services, MongoDB/MySQL for data storage, and Playwright for automated testing and web scraping.
 - *DevOps:* Familiar with Docker containerization, Nginx configuration, and CI/CD workflows using GitHub Actions.
 
@@ -66,15 +66,15 @@
 
 *Web3.0 Technology Limited* #h(1fr) Nov 2024 - Present \
 Frontend Developer (Intern) #h(1fr) Hong Kong \
-- Developed and optimized a Next.js admin dashboard for #link("https://daviddong.me/projects/dapp")[Central Node 55] events, implementing user configuration, node management, and reward distribution features.Integrated ECharts data visualization modules, enabling real-time monitoring of user activity and geographic distribution.
-- Built a complete Web3 client interface with token exchange, staking, and NFT reward claiming using Wagmi for smart contract interactions, increasing user conversion by 25%.
-- Designed and developed on-chain data analysis systems using TypeScript scripts to process cross-platform data sources (XLSX, CSV, TXT), enabling wallet address verification and token holding analysis.
+- Developed and optimized a Next.js admin dashboard for #link("https://daviddong.me/projects/dapp")[Central Node 55] events, implementing user configuration, node management, and reward distribution features. Integrated ECharts modules for user activity and geographic distribution data visualization.
+- Built a complete Web3 client interface with token exchange, staking, and NFT reward claiming using Wagmi for smart contract interactions.
+- Designed and developed data analysis using TypeScript scripts to process cross-platform data sources (XLSX, CSV, TXT), enabling wallet address verification and token holding analysis.
 
 *PKU-Changsha Institute for Computing and Digital Economy* #h(1fr) July 2023 - July 2024 \
 Frontend Developer (Full Time)#h(1fr) Changsha, China \
-- Led development of an #link("https://daviddong.me/projects/chatbot")[AI-powered medical assistant], building React application architecture with SSE streaming, user role management, and real-time search features.
+- Led development of an #link("https://daviddong.me/projects/chatbot")[AI-powered medical assistant], building React application architecture with SSE streaming, user role management, and literature search features.
 - Collaborated across departments to develop the #link("http://www.eeg-x.com/")[EEG-X intelligent EEG analysis platform], designing high-precision EEG waveform visualization components with ECharts.
-- Developed a #link("https://daviddong.me/projects/data-visualization")[smart campus data visualization system] using Three.js to build interactive 3D office scenes, reducing loading time by 50% through model compression and rendering optimization.
+- Developed a #link("https://daviddong.me/projects/data-visualization")[data visualization project] using Three.js to build interactive 3D office scenes, reducing loading time by 50% through model compression and rendering optimization.
 
 *Tencent Music Entertainment* #h(1fr) May 2022 - Oct 2022 \
 Frontend Developer (Intern) #h(1fr) Shenzhen, China \
@@ -121,7 +121,7 @@ Bachelor of Science in Construction Environment and Energy Application Engineeri
 
 == 技能
 #chiline()
-- 在*前端开发*领域, 熟悉 JavaScript/TypeScript、React 和 Vue.js 生态系统, 以及 Next.js 和 Nuxt.js 等全栈框架的使用。掌握状态管理工具, 组件库的使用及性能优化技术。
+- 在*前端开发*领域, 熟悉 JavaScript/TypeScript、React 和 Vue.js 生态系统, 以及 Next.js 等全栈框架的使用。掌握状态管理工具, 组件库的使用及性能优化技术。
 - 具备*后端开发*基础知识, 能使用 Node.js 和 Express 搭建服务, 结合 MongoDB/MySQL 实现数据持久化, 并利用 Playwright 开发自动化测试和爬虫脚本。
 - 了解*DevOps 实践*, 能够使用 Docker 进行容器化部署, 优化镜像体积, 配置 Nginx 服务器, 并通过 GitHub Actions 实现持续集成与部署流程。
 
@@ -132,13 +132,13 @@ Bachelor of Science in Construction Environment and Energy Application Engineeri
 前端开发工程师（实习） #h(1fr) 香港 \
 - 为#link("https://daviddong.me/projects/dapp")[Central Node 55] 活动开发并优化Next.js管理后台, 设计实现用户配置、节点管理和奖励发放功能, 集成ECharts数据可视化模块, 使运营团队实时监控用户活跃度和地理分布, 提升决策效率。
 
-- 构建完整的Web3用户客户端界面, 实现代币兑换质押和NFT奖励领取等核心功能, 使用 Wagmi 与智能合约交互, 提升用户转化率25%。
+- 构建完整的 Web3 用户客户端界面, 使用 Wagmi 与智能合约交互, 实现代币兑换质押和NFT奖励领取等核心功能.
 
 - 设计并开发链上数据分析系统, 使用TypeScript编写自动化脚本处理跨平台数据源(XLSX、CSV、TXT), 实现钱包地址交叉验证和持币分析, 为市场策略调整提供数据支持,缩短分析周期从天级到小时级。
 
 *北京大学长沙计算与数字经济研究院* #h(1fr) 2023年7月 - 2024年7月  \
 前端开发工程师（全职） #h(1fr) 长沙 \
-- 主导开发#link("https://daviddong.me/projects/chatbot")[AI智能诊疗助手前端系统], 从零构建React应用架构, 实现SSE流式传输、用户角色管理和实时搜索等核心功能, 系统已在大型肿瘤专科三甲医院推广测试, 有效节约医生文献查阅时间, 提升诊疗效率。
+- 主导开发#link("https://daviddong.me/projects/chatbot")[AI智能诊疗助手前端系统], 从零构建React应用架构, 实现SSE流式传输、用户角色管理和文献检索等核心功能, 系统已在大型肿瘤专科三甲医院推广测试, 有效节约医生文献查阅时间, 提升诊疗效率。
 
 - 跨部门协作开发#link("http://www.eeg-x.com/")[EEG-X智能脑电分析平台], 使用ECharts设计高精度脑电波形可视化组件, 实现波形高度自适应和时间线标注功能,平台已应用于癫痫诊断, 提高诊断准确率40%, 缩短分析时间60%。
 
