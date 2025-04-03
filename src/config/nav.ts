@@ -7,4 +7,8 @@ export const navLinks = [
     path: "/projects",
     label: "项目",
   },
+  {
+    path: "/snippets",
+    label: "片段",
+  },
 ] as const;
