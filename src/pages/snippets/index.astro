@@ -1,11 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { YouTube } from 'astro-embed';
 ---
 
 <Layout
   className="flex h-svh max-w-sm flex-col justify-center w-96"
 >
-<YouTube id="lTRDU5oWfz4" />
- 
+<iframe
+    class="w-full h-64 mt-14"
+  src="https://www.youtube.com/embed/lTRDU5oWfz4"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+></iframe>
 </Layout>
