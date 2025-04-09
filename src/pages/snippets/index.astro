@@ -1,13 +1,22 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+const videoLists = [
+  "https://www.youtube.com/embed/lTRDU5oWfz4",
+  "https://www.youtube.com/embed/vH2RWMw-Nvc",
+];
 ---
 
 <Layout
   className="flex h-svh max-w-sm flex-col justify-center w-96"
 >
-<iframe
-    class="w-full h-64 mt-14"
-  src="https://www.youtube.com/embed/lTRDU5oWfz4"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-></iframe>
+
+{
+  videoLists.map((video) => (
+    <iframe
+      class="w-full h-64 mt-14"
+      src={video}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    ></iframe>
+  ))
+}
 </Layout>
