@@ -154,7 +154,7 @@ Bachelor of Science in Construction Environment and Energy Application Engineeri
 + 改进智能合约交互体验：在abitype 库的基础上自定义类型，实现了合约数据的具名属性访问 (e.g., ⁠res.id vs ⁠res[0])，大幅增强了代码可读性与类型安全性。
 
 #link("https://daviddong.me/projects/chatbot")[*基于大语言模型的 AI 诊疗助手*] - 北京大学长沙计算与数字经济研究院 #h(1fr) 2024 \
-+ 从零主导前端架构与部署优化：独立完成技术选型 (React, Vite, TailwindCSS, React Router, Jotai)，引入 Playwright 进行E2E测试，zod 进行用户输入/表单校验，通过Docker多阶段构建将部署镜像从100MB显著压缩至20MB，实现高效私有化部署。
++ 从零主导前端架构与部署优化：独立完成技术选型 (React, Vite, TailwindCSS, React Router, Jotai)，引入 Playwright 进行E2E测试，zod 进行用户输入和表单校验，通过Docker多阶段构建将部署镜像从100MB显著压缩至20MB，实现高效私有化部署。
 + 打造流畅AI对话核心体验：运用SSE实现AI流式响应，并使用React Query乐观更新解决数据同步延迟，使用 remark 解析生成的markdown及实现动态光标效果，全面提升用户交互友好度。
 + 驱动项目成功落地与持续迭代：参与并负责系统在大型三甲医院的部署与测试，并建立用户反馈机制，持续收集需求指导产品优化，有效提升医生诊疗效率。
 
@@ -163,7 +163,7 @@ Bachelor of Science in Construction Environment and Energy Application Engineeri
 + 开发动态地理数据可视化模块： 基于 ECharts 实现地图标记高亮、动态飞线及数据渐变等多种交互效果，显著提升了园区运营数据的呈现直观性。
 
 #link("https://daviddong.me/projects/tme")[*QQ 音乐直播间活动页开发*] - 腾讯音乐娱乐集团 #h(1fr) 2022\
-+ 参与千万级用户平台直播H5活动开页发： 为QQ音乐，全民K歌等核心产品开发交互式直播运营活动（如绿钻抽奖，页面小游戏等），保障了活动的稳定性和用户体验。
++ 参与千万级用户平台直播H5活动页开发： 为QQ音乐，全民K歌等核心产品开发交互式直播运营活动（如绿钻抽奖，页面小游戏等），保障了活动的稳定性和用户体验。
 + 跨App核心组件统一： 针对QQ音乐/全民K歌/懒人听书的直播送礼榜单，重构为统一可配置React组件，显著提升迭代效率、代码复用率，并确保了三大平台视觉与交互的一致性。
 
 *独立开发项目* #h(1fr) 2023-2025\
