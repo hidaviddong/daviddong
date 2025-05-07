@@ -38,71 +38,70 @@
 )
 
 
-= DONG, Haoyu (David) / 董皓宇
+#grid(
+  columns: (1fr), // Changed to a single column layout for the header
+  [
+    = DONG, Haoyu (David) / 董皓宇
+    #v(0.5em)
+    #text(size: 10pt )[
+      +852 46720879 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]
 
-#link("mailto:hidaviddong@gmail.com") / 🇭🇰 +852 46720879 / 🇨🇳 +86 19926690273 / #link("https://wa.link/bbs3i9")[WhatsApp] / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]
+      Based in Hong Kong. Actively seeking a Software Development Engineer position.
 
+      With three years of front-end development experience, I have contributed to projects in *Large Language Model Applications, Decentralized Applications (dApps), and Admin Dashboard Systems*.
 
+      Proficient in front-end technologies including *TypeScript, React.js* and its ecosystem. Possess foundational back-end skills, capable of building APIs with *Node.js and Express*. Familiar with Docker containerization and CI/CD practices.
 
-#additional-block[
-  #text(weight: "bold", size: 1em)[Summary: ]
-  Three years of experience in front-end development, previously employed at Tencent Music and Peking University Changsha Institute. Skilled in developing AI application, dApps, and data visualization.
-    #v(0.1em)
-  #text(weight: "bold", size: 1em)[VISA Status: ]
-  Current Student Visa holder, eligible for IANG and available for work from July 2025.
-  #v(0.1em)
-  #text(weight: "bold", size: 1em)[Languages: ]
-  Putonghua (Native), Cantonese (Beginner), English (Intermediate)
-  #v(0.1em)
-  #text(weight: "bold", size: 1em)[Expected Salary: ]
-  HKD 25,000 - 30,000 monthly 
-]
+      *Visa Status:* Current Student Visa holder, *eligible for IANG and available for work from Sep 2025.*\
+      *Languages:* Putonghua (Native), Cantonese (Beginner), English (Intermediate).
 
-== Skills
-#chiline()
-- *Frontend:* Proficient in JavaScript/TypeScript, React, Vue.js ecosystems, and full-stack frameworks like Next.js. Experienced with state management tools and performance optimization.
-- *Backend:* Basic knowledge of Node.js and Express for building services, MongoDB/MySQL for data storage, and Playwright for automated testing and web scraping.
-- *DevOps:* Familiar with Docker containerization, Nginx configuration, and CI/CD workflows using GitHub Actions.
-
+    ]
+  ]
+)
 
 == Work Experience
 #chiline()
 
-*Web3.0 Technology Limited* #h(1fr) Nov 2024 - Present \
-Frontend Developer (Intern) #h(1fr) Hong Kong \
-- Developed and optimized a Next.js admin dashboard for #link("https://daviddong.me/projects/dapp")[Central Node 55] events, implementing user configuration, node management, and reward distribution features. Integrated ECharts modules for user activity and geographic distribution data visualization.
-- Built a complete Web3 client interface with token exchange, staking, and NFT reward claiming using Wagmi for smart contract interactions.
-- Designed and developed data analysis using TypeScript scripts to process cross-platform data sources (XLSX, CSV, TXT), enabling wallet address verification and token holding analysis.
+*Web3.0 Technology Limited* - Frontend Developer Intern #h(1fr) Nov 2024 - Apr 2025, Hong Kong\
 
-*PKU-Changsha Institute for Computing and Digital Economy* #h(1fr) July 2023 - July 2024 \
-Frontend Developer (Full Time)#h(1fr) Changsha, China \
-- Led development of an #link("https://daviddong.me/projects/chatbot")[AI-powered medical assistant], building React application architecture with SSE streaming, user role management, and literature search features.
-- Collaborated across departments to develop the #link("http://www.eeg-x.com/")[EEG-X intelligent EEG analysis platform], designing high-precision EEG waveform visualization components with ECharts.
-- Developed a #link("https://daviddong.me/projects/data-visualization")[data visualization project] using Three.js, Blender to build interactive 3D office scenes, reducing loading time by 50% through model compression and rendering optimization.
+*PKU-Changsha Institute for Computing and Digital Economy* - Frontend Developer #h(1fr) Jul 2023 - Jul 2024, Changsha \
 
-*Tencent Music Entertainment* #h(1fr) May 2022 - Oct 2022 \
-Frontend Developer (Intern) #h(1fr) Shenzhen, China \
-- Developed #link("https://daviddong.me/projects/tme")[interactive games] for live streaming rooms in QQ Music, WeSing, and JOOX using H5 hybrid native technology.
-- Participated in the leaderboard feature reconstruction project, implementing cross-platform logic and using a unified npm component library to reduce code redundancy.
+*Tencent Music Entertainment* - Frontend Developer Intern #h(1fr) May 2022 - Oct 2022, Shenzhen \
 
+== Projects
+#chiline()
 
-\
-In my spare time, I enjoy exploring new technologies. I developed #link("https://daviddong.me/projects/autopdf")[*AutoPDF*], a chat-based PDF generation tool powered by large language models, and #link("https://daviddong.me/projects/comments")[*Comments*], a lightweight open-source comment system (50+ GitHub stars). I also actively contribute to open source communities, including Node.js core (#link("https://github.com/nodejs/node/pull/54569")[PR\#54569]) and React.js documentation (#link("https://github.com/reactjs/react.dev/pull/6509")[PR\#6509]).
+#link("https://daviddong.me/projects/dapp")[*Decentralized Application (dApp)*] - Web3.0 Technology Limited #h(1fr) 2025 \
++ Using Next.js App Router refactored routing, replacing state-driven navigation, boosting initial load speed & code architecture.
++ Via abitype customization, enhanced smart contract DX with named property access (e.g., ⁠res.id), improving code readability & type safety.
+
+#link("https://daviddong.me/projects/chatbot")[*LLM-based AI Medical Assistant*] - PKU-Changsha Institute for Computing and Digital Economy #h(1fr) 2024 \
++ With React/Vite/Jotai, led frontend architecture, cutting Docker image to 20MB (from 100MB) via multi-stage builds, enabling efficient private deployment.
++ Using SSE (streaming) & React Query optimistic updates, built seamless AI chat, resolving data sync latency & enhancing overall UX.	
+
+#link("https://daviddong.me/projects/data-visualization")[*Smart Campus Visualization System*] - PKU-Changsha Institute for Computing and Digital Economy #h(1fr) 2023 \
++ With Blender/Three.js, built interactive 3D scenes, optimizing rendering via pre-baked lightmaps & model simplification, ensuring smooth FPS.
++ Leveraging ECharts, developed dynamic geospatial visualizations (highlights, fly-lines), boosting data presentation intuitiveness.
+
+#link("https://daviddong.me/projects/tme")[*QQ Music Live Room Campaign Page Development*] - Tencent Music Entertainment Group #h(1fr) 2022\
++ Developed QQ Music/WeSing live campaigns (10M+ users), ensuring stability & UX under high concurrency.
++ By refactoring the gift list into a unified React component for 3 apps, improved cross-platform consistency.
+
+*Personal Projects* #h(1fr) 2023-2025\
++ #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - Conversational PDF generation tool based on Large Language Models.
++ #link("https://daviddong.me/projects/comments")[*Comments*] - Lightweight open-source commenting system, 50+ GitHub Stars.
++ Open Source Contributor: Contributions to Node.js and React.js.
 
 == Education
 #chiline()
 
-*Hong Kong Metropolitan University* #h(1fr) Sep 2024 -- Sep 2025 \
-Master of Computing in Computer Science #h(1fr) Hong Kong \
-- The Katie Shu Sui Pui Charitable Trust — Research Training Fellowship in 2024
-- Participating in deep learning research on point cloud compression
+*Hong Kong Metropolitan University* - Master of Computing #h(1fr) Sep 2024 - Sep 2025, Hong Kong
+\ Received Katie Shu Sui Pui Scholarship;  Research on deep learning-based point cloud compression.
 
-*ShenZhen University* #h(1fr) Sep 2020 -- June 2023 \
-Master of Science in Materials Science and Engineering #h(1fr) Shenzhen, China \
-- Published a paper on zinc-air batteries as second author in Carbon journal
+*Shenzhen University* - Master of Engineering in Materials Science #h(1fr) Sep 2020 - Jun 2023, Shenzhen
+\ Awarded Second-class Campus Scholarship; Research on metal-air battery, with a paper published in *Carbon* .
 
-*Hunan University of Technology* #h(1fr) Sep 2016 -- June 2020 \
-Bachelor of Science in Construction Environment and Energy Application Engineering  #h(1fr) Zhuzhou, China \
+*Hunan University of Technology* - Bachelor of Engineering in Built Environment and Energy Application Engineering #h(1fr) Sep 2016 - Jun 2020, Zhuzhou
 
 // 中文简历
 #pagebreak()
@@ -151,7 +150,7 @@ Bachelor of Science in Construction Environment and Energy Application Engineeri
 
 #link("https://daviddong.me/projects/dapp")[*DApp去中心化应用*] - Web3.0 Technology Limited #h(1fr) 2025 \
 + 主导应用路由重构：引入 Next.js App Router 替代旧有状态驱动导航，显著提升页面初始加载速度并优化了代码架构。
-+ 改进智能合约交互体验：在abitype 库的基础上自定义类型，实现了合约数据的具名属性访问 (e.g., ⁠res.id vs ⁠res[0])，大幅增强了代码可读性与类型安全性。
++ 改进智能合约交互体验：在abitype 库的基础上自定义类型，实现了合约数据的具名属性访问 (e.g., `⁠res.id` vs ⁠`res[0]`)，大幅增强了代码可读性与类型安全性。
 
 #link("https://daviddong.me/projects/chatbot")[*基于大语言模型的 AI 诊疗助手*] - 北京大学长沙计算与数字经济研究院 #h(1fr) 2024 \
 + 从零主导前端架构与部署优化：独立完成技术选型 (React, Vite, TailwindCSS, React Router, Jotai)，引入 Playwright 进行E2E测试，zod 进行用户输入和表单校验，通过Docker多阶段构建将部署镜像从100MB显著压缩至20MB，实现高效私有化部署。
