@@ -70,7 +70,7 @@
 
 #link("https://daviddong.me/projects/dapp")[*Decentralized Application (dApp)*] - Web3.0 Technology Limited #h(1fr) 2025 \
 + Replaced legacy state-driven navigation with Next.js App Router, improving initial page load speed and optimizing code architecture.
-+ Customized types based on the abitype library, enabling named attribute access for contract data (e.g., ⁠res.id vs ⁠res[0]), enhanced code readability and type safety.
++ Customized types based on the abitype library, enabling named attribute access for contract data (e.g., ⁠`res.id` vs ⁠`res[0]`), enhanced code readability and type safety.
 
 #link("https://daviddong.me/projects/chatbot")[*LLM-based AI Medical Assistant*] - PKU-Changsha Institute for Computing and Digital Economy #h(1fr) 2024 \
 + Build front-end architecture from scratch, tech stack (React, Vite, TailwindCSS, React Router, Jotai), Playwright for E2E testing, zod for user input/form validation. 
