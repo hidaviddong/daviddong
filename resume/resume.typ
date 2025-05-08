@@ -102,7 +102,7 @@
 *Hunan University of Technology* - Bachelor of Engineering in BEEE #h(1fr) Sep 2016 - Jun 2020, Zhuzhou
 
 
-// 中文简历
+// 中文简历 - 简体中文
 #pagebreak()
 
 #let avatar-size = 3cm
@@ -183,3 +183,85 @@
 \ 在校期间获得校园二等奖学金，参与金属空气电池研究项目，并发表论文收录在 Carbon期刊。
 
 *湖南工业大学* - 建筑环境与能源应用工程学士 #h(1fr)2016年9月 - 2020年6月，株洲
+
+// 中文简历 - 繁體中文
+#pagebreak()
+
+#let avatar-size = 3cm
+
+#grid(
+  columns: (5fr, 1fr),
+  column-gutter: 2.5em,
+  align: start,
+  [
+    = 董皓宇
+    #v(0.5em)
+    #text(size: 10pt )[
+      19926690273 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]
+
+      男, 1999年出生於湖南益陽，現居香港。目前正在尋求一份軟件開發崗位。\
+  
+      我有三年前端開發經驗，參與過*大語言模型應用、去中心化應用、中後台管理系統*的開發。
+
+      熟練掌握前端開發技術棧 *TypeScipt, React.js* 以及周邊生態的使用。具備基礎後端開發能力，能夠使用 *Node.js, Express* 構建 API 服務。了解 Docker 容器化工具以及CICD 的實踐。
+    
+    ]
+  ],
+  block(
+    width: avatar-size,
+    height: avatar-size,
+    radius: 0%,
+    stroke: (paint: rgb("#cccccc"), thickness: 1pt),
+    clip: false,
+    image("avatar.jpg", width: 100%, height: 100%, fit: "cover")
+  )
+)
+
+== 工作經歷
+#chiline()
+
+*Web3.0 Technology Limited* - 前端開發實習生 #h(1fr) 2024 年 11 月 - 2025 年 4 月，香港\
+
+*北京大學長沙計算與數字經濟研究院* - 前端開發工程師 #h(1fr) 2023年7月 - 2024年7月，長沙 \
+
+*騰訊音樂娛樂集團* - 前端開發實習生 #h(1fr)  2022年5月 - 2022年10月，深圳 \
+
+== 項目經歷
+#chiline()
+
+#link("https://daviddong.me/projects/dapp")[*DApp去中心化應用*] - Web3.0 Technology Limited #h(1fr) 2025 \
++ 主導應用路由重構：引入 Next.js App Router 替代舊有狀態驅動導航，顯著提升頁面初始加載速度並優化了代碼架構。
++ 改進智能合約交互體驗：在abitype 庫的基礎上自定義類型，實現了合約數據的具名屬性訪問 (e.g., `⁠res.id` vs ⁠`res[0]`)，大幅增強了代碼可讀性與類型安全性。
+
+#link("https://daviddong.me/projects/chatbot")[*基於大語言模型的 AI 診療助手*] - 北京大學長沙計算與數字經濟研究院 #h(1fr) 2024 \
++ 從零主導前端架構與部署優化：獨立完成技術選型 (React, Vite, TailwindCSS, React Router, Jotai)，引入 Playwright 進行E2E測試，zod 進行用戶輸入和表單校驗。
+
++ 打造流暢AI對話核心體驗：運用SSE實現AI流式響應，並使用React Query樂觀更新解決數據同步延遲問題，使用 remark 解析生成的markdown及實現動態光標效果，全面提升用戶交互友好度。
+
++ 將項目進行容器化改造：利用Docker多階段構建技術，將鏡像從100MB顯著壓縮至20MB，實現高效部署。
+
+
+#link("https://daviddong.me/projects/data-visualization")[*智慧園區可視化系統*] - 北京大學長沙計算與數字經濟研究院 #h(1fr) 2023 \
++ 構建交互式3D場景： 運用 Blender 與 Three.js 搭建可交互3D環境，通過預烘焙光照貼圖及模型精簡，成功解決渲染卡頓問題，確保了流暢幀率。
++ 開發可視化模塊： 基於 ECharts 實現地圖標記高亮、動態飛線及數據漸變等多種交互效果，顯著提升了園區運營數據的呈現直觀性。
+
+#link("https://daviddong.me/projects/tme")[*QQ 音樂直播間活動頁開發*] - 騰訊音樂娛樂集團 #h(1fr) 2022\
++ 參與千萬級用戶平台直播H5活動頁開發： 為QQ音樂，全民K歌等核心產品開發交互式直播運營活動（如綠鑽抽獎，頁面小遊戲等），保障了活動的穩定性和用戶體驗。
++ 跨App核心組件統一： 針對QQ音樂/全民K歌/懶人聽書的直播間送禮榜單，重構為統一可配置React組件，顯著提升迭代效率、代碼復用率，並確保了三大平台視覺與交互的一致性。
+
+*獨立開發項目* #h(1fr) 2023-2025\
++ #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - 基於大語言模型的對話式PDF生成工具。
++ #link("https://daviddong.me/projects/comments")[*Comments*] - 輕量級開源評論系統，GitHub Star 50+，阮一峰週刊推薦。
++ 積極參與開源社區：Node.js、React.js 貢獻者。
+
+
+== 教育經歷
+#chiline()
+
+*香港都會大學* - 計算機碩士 #h(1fr)2024年9月 - 2025年9月，香港
+\ 入學前獲得Katie Shu Sui Pui獎學金, 參與深度學習點雲壓縮研究項目，並發表相關論文。
+
+*深圳大學* - 材料與化工碩士 #h(1fr) 2020年9月 - 2023年6月，深圳
+\ 在校期間獲得校園二等獎學金，參與金屬空氣電池研究項目，並發表論文收錄在 Carbon期刊。
+
+*湖南工業大學* - 建築環境與能源應用工程學士 #h(1fr)2016年9月 - 2020年6月，株洲
