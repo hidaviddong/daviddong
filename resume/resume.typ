@@ -44,15 +44,12 @@
     = DONG, Haoyu (David) / 董皓宇
     #v(0.5em)
     #text(size: 10pt )[
-      +852 46720879 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]
-
-      Based in Hong Kong. Actively seeking a Software Development Engineer position.
-
-      With three years of front-end development experience, I have contributed to projects in *Large Language Model Applications, Decentralized Applications (dApps), and Admin Dashboard Systems*.
-
+      +852 46720879 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]\
+      
+      With three years of front-end development experience, I have contributed to projects in *Large Language Model Applications, Decentralized Applications, and Admin Dashboard Systems*.\
       Proficient in front-end technologies including *TypeScript, React.js* and its ecosystem. Possess foundational back-end skills, capable of building APIs with *Node.js and Express*. Familiar with Docker containerization and CI/CD practices.
 
-      *Visa Status:* Current Student Visa holder, *eligible for IANG and available for work from Sep 2025.*\
+      *Visa Status:* IANG and available for work from Sep 2025.\
       *Languages:* Putonghua (Native), Cantonese (Beginner), English (Intermediate).
 
     ]
@@ -72,20 +69,21 @@
 #chiline()
 
 #link("https://daviddong.me/projects/dapp")[*Decentralized Application (dApp)*] - Web3.0 Technology Limited #h(1fr) 2025 \
-+ Using Next.js App Router refactored routing, replacing state-driven navigation, boosting initial load speed & code architecture.
-+ Via abitype customization, enhanced smart contract DX with named property access (e.g., ⁠res.id), improving code readability & type safety.
++ Replaced legacy state-driven navigation with Next.js App Router, improving initial page load speed and optimizing code architecture.
++ Customized types based on the abitype library, enabling named attribute access for contract data (e.g., ⁠res.id vs ⁠res[0]), enhanced code readability and type safety.
 
 #link("https://daviddong.me/projects/chatbot")[*LLM-based AI Medical Assistant*] - PKU-Changsha Institute for Computing and Digital Economy #h(1fr) 2024 \
-+ With React/Vite/Jotai, led frontend architecture, cutting Docker image to 20MB (from 100MB) via multi-stage builds, enabling efficient private deployment.
-+ Using SSE (streaming) & React Query optimistic updates, built seamless AI chat, resolving data sync latency & enhancing overall UX.	
++ Build front-end architecture from scratch, tech stack (React, Vite, TailwindCSS, React Router, Jotai), Playwright for E2E testing, zod for user input/form validation. 
++ Implemented AI streaming responses using SSE, used React Query optimistic updates to resolve data synchronization latency, enhancing user interaction.
++ Using Docker, significantly reducing image size from 100MB to 20MB using multi-stage builds for efficient deployment.
 
 #link("https://daviddong.me/projects/data-visualization")[*Smart Campus Visualization System*] - PKU-Changsha Institute for Computing and Digital Economy #h(1fr) 2023 \
-+ With Blender/Three.js, built interactive 3D scenes, optimizing rendering via pre-baked lightmaps & model simplification, ensuring smooth FPS.
-+ Leveraging ECharts, developed dynamic geospatial visualizations (highlights, fly-lines), boosting data presentation intuitiveness.
++ Used Blender and Three.js to create an interactive 3D environment. Successfully resolved rendering lag and ensured smooth frame rates by pre-baking lightmaps and simplifying models. 
++  Implemented interactive effects like map highlighting, dynamic lines using ECharts,  improve data intuitiveness
 
-#link("https://daviddong.me/projects/tme")[*QQ Music Live Room Campaign Page Development*] - Tencent Music Entertainment Group #h(1fr) 2022\
-+ Developed QQ Music/WeSing live campaigns (10M+ users), ensuring stability & UX under high concurrency.
-+ By refactoring the gift list into a unified React component for 3 apps, improved cross-platform consistency.
+#link("https://daviddong.me/projects/tme")[*QQ Music Live Room Development*] - Tencent Music Entertainment Group #h(1fr) 2022\
++ Developed H5 live streaming pages: Core products like QQ Music and WeSing (10M+ users), ensuring event stability and user experience. 
++ Refactored the live room gifting page for QQ Music, WeSing, and Kuwo Music into a unified, configurable React component, Improved efficiency and code reusability.
 
 *Personal Projects* #h(1fr) 2023-2025\
 + #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - Conversational PDF generation tool based on Large Language Models.
@@ -96,12 +94,13 @@
 #chiline()
 
 *Hong Kong Metropolitan University* - Master of Computing #h(1fr) Sep 2024 - Sep 2025, Hong Kong
-\ Received Katie Shu Sui Pui Scholarship;  Research on deep learning-based point cloud compression.
+\ Katie Shu Sui Pui Scholarship;  Research on deep learning-based point cloud compression.
 
 *Shenzhen University* - Master of Engineering in Materials Science #h(1fr) Sep 2020 - Jun 2023, Shenzhen
-\ Awarded Second-class Campus Scholarship; Research on metal-air battery, with a paper published in *Carbon* .
+\ Second-class Campus Scholarship; Research on metal-air battery, paper published in *Carbon* .
 
-*Hunan University of Technology* - Bachelor of Engineering in Built Environment and Energy Application Engineering #h(1fr) Sep 2016 - Jun 2020, Zhuzhou
+*Hunan University of Technology* - Bachelor of Engineering in BEEE #h(1fr) Sep 2016 - Jun 2020, Zhuzhou
+
 
 // 中文简历
 #pagebreak()
@@ -118,7 +117,7 @@
     #text(size: 10pt )[
       19926690273 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]
 
-      男, 1999年出生于湖南益阳，现居香港/深圳。目前正在寻求一份软件开发岗位。\
+      男, 1999年出生于湖南益阳，现居香港。目前正在寻求一份软件开发岗位。\
   
       我有三年前端开发经验，参与过*大语言模型应用、去中心化应用、中后台管理系统*的开发。
 
@@ -153,22 +152,25 @@
 + 改进智能合约交互体验：在abitype 库的基础上自定义类型，实现了合约数据的具名属性访问 (e.g., `⁠res.id` vs ⁠`res[0]`)，大幅增强了代码可读性与类型安全性。
 
 #link("https://daviddong.me/projects/chatbot")[*基于大语言模型的 AI 诊疗助手*] - 北京大学长沙计算与数字经济研究院 #h(1fr) 2024 \
-+ 从零主导前端架构与部署优化：独立完成技术选型 (React, Vite, TailwindCSS, React Router, Jotai)，引入 Playwright 进行E2E测试，zod 进行用户输入和表单校验，通过Docker多阶段构建将部署镜像从100MB显著压缩至20MB，实现高效私有化部署。
-+ 打造流畅AI对话核心体验：运用SSE实现AI流式响应，并使用React Query乐观更新解决数据同步延迟，使用 remark 解析生成的markdown及实现动态光标效果，全面提升用户交互友好度。
-+ 驱动项目成功落地与持续迭代：参与并负责系统在大型三甲医院的部署与测试，并建立用户反馈机制，持续收集需求指导产品优化，有效提升医生诊疗效率。
++ 从零主导前端架构与部署优化：独立完成技术选型 (React, Vite, TailwindCSS, React Router, Jotai)，引入 Playwright 进行E2E测试，zod 进行用户输入和表单校验。
+
++ 打造流畅AI对话核心体验：运用SSE实现AI流式响应，并使用React Query乐观更新解决数据同步延迟问题，使用 remark 解析生成的markdown及实现动态光标效果，全面提升用户交互友好度。
+
++ 将项目进行容器化改造：利用Docker多阶段构建技术，将镜像从100MB显著压缩至20MB，实现高效部署。
+
 
 #link("https://daviddong.me/projects/data-visualization")[*智慧园区可视化系统*] - 北京大学长沙计算与数字经济研究院 #h(1fr) 2023 \
-+ 构建交互式3D办公场景并极致优化渲染性能： 运用 Blender 与 Three.js 搭建可交互3D环境，通过预烘焙光照贴图及模型精简，成功解决渲染卡顿，将实时光照计算转为预渲染，确保了流畅帧率。
-+ 开发动态地理数据可视化模块： 基于 ECharts 实现地图标记高亮、动态飞线及数据渐变等多种交互效果，显著提升了园区运营数据的呈现直观性。
++ 构建交互式3D场景： 运用 Blender 与 Three.js 搭建可交互3D环境，通过预烘焙光照贴图及模型精简，成功解决渲染卡顿问题，确保了流畅帧率。
++ 开发可视化模块： 基于 ECharts 实现地图标记高亮、动态飞线及数据渐变等多种交互效果，显著提升了园区运营数据的呈现直观性。
 
 #link("https://daviddong.me/projects/tme")[*QQ 音乐直播间活动页开发*] - 腾讯音乐娱乐集团 #h(1fr) 2022\
 + 参与千万级用户平台直播H5活动页开发： 为QQ音乐，全民K歌等核心产品开发交互式直播运营活动（如绿钻抽奖，页面小游戏等），保障了活动的稳定性和用户体验。
-+ 跨App核心组件统一： 针对QQ音乐/全民K歌/懒人听书的直播送礼榜单，重构为统一可配置React组件，显著提升迭代效率、代码复用率，并确保了三大平台视觉与交互的一致性。
++ 跨App核心组件统一： 针对QQ音乐/全民K歌/懒人听书的直播间送礼榜单，重构为统一可配置React组件，显著提升迭代效率、代码复用率，并确保了三大平台视觉与交互的一致性。
 
 *独立开发项目* #h(1fr) 2023-2025\
 + #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - 基于大语言模型的对话式PDF生成工具。
 + #link("https://daviddong.me/projects/comments")[*Comments*] - 轻量级开源评论系统，GitHub Star 50+，阮一峰周刊推荐。
-+ 积极参与开源社区：Nodejs、React.js 贡献者。
++ 积极参与开源社区：Node.js、React.js 贡献者。
 
 
 == 教育经历
