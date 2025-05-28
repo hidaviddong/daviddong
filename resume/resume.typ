@@ -69,7 +69,7 @@
 #chiline()
 
 #link("https://daviddong.me/projects/dapp")[*Decentralized Application (dApp)*] - Web3.0 Technology Limited #h(1fr) 2025 \
-+ Replaced legacy state-driven navigation with Next.js App Router, improving initial page load speed and optimizing code architecture.
++ Replaced state-driven navigation with Next.js App Router, optimizing initial page load speed and bundle size.
 + Customized types based on the abitype library, enabling named attribute access for contract data (e.g., ⁠`res.id` vs ⁠`res[0]`), enhanced code readability and type safety.
 
 #link("https://daviddong.me/projects/chatbot")[*LLM-based AI Medical Assistant*] - PKU-Changsha Institute for Computing and Digital Economy #h(1fr) 2024 \
@@ -88,6 +88,7 @@
 *Personal Projects* #h(1fr) 2023-2025\
 + #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - Conversational PDF generation tool based on Large Language Models.
 + #link("https://daviddong.me/projects/comments")[*Comments*] - Lightweight open-source commenting system, 50+ GitHub Stars.
++ #link("https://github.com/hidaviddong/98.ui")[*98.ui*] - Windows 98 style UI component library.
 + Open Source Contributor: Contributions to Node.js and React.js.
 
 == Education
@@ -97,7 +98,7 @@
 \ Katie Shu Sui Pui Scholarship;  Research on deep learning-based point cloud compression.
 
 *Shenzhen University* - Master of Engineering in Materials Science #h(1fr) Sep 2020 - Jun 2023, Shenzhen
-\ Second-class Campus Scholarship; Research on metal-air battery, paper published in *Carbon* .
+\ Second-class Campus Scholarship; Research on metal-air battery, paper published in Carbon .
 
 *Hunan University of Technology* - Bachelor of Engineering in BEEE #h(1fr) Sep 2016 - Jun 2020, Zhuzhou
 
@@ -170,6 +171,7 @@
 *独立开发项目* #h(1fr) 2023-2025\
 + #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - 基于大语言模型的对话式PDF生成工具。
 + #link("https://daviddong.me/projects/comments")[*Comments*] - 轻量级开源评论系统，GitHub Star 50+，阮一峰周刊推荐。
++ #link("https://github.com/hidaviddong/98.ui")[*98.ui*] - 复刻Windows 98风格的前端UI组件库。
 + 积极参与开源社区：Node.js、React.js 贡献者。
 
 
@@ -252,6 +254,7 @@
 *獨立開發項目* #h(1fr) 2023-2025\
 + #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - 基於大語言模型的對話式PDF生成工具。
 + #link("https://daviddong.me/projects/comments")[*Comments*] - 輕量級開源評論系統，GitHub Star 50+，阮一峰週刊推薦。
++ #link("https://github.com/hidaviddong/98.ui")[*98.ui*] - 復刻 Windows 98 風格的前端 UI 組件庫。
 + 積極參與開源社區：Node.js、React.js 貢獻者。
 
 
