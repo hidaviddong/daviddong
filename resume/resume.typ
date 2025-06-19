@@ -43,53 +43,64 @@
   [
     = DONG, Haoyu (David) / 董皓宇
     #v(0.5em)
-    #text(size: 10pt )[
+    #text(size: 10pt)[
       +852 46720879 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]\
       
-      With three years of front-end development experience, I have contributed to projects in *Large Language Model Applications, Decentralized Applications, and Admin Dashboard Systems*.\
-      Proficient in front-end technologies including *TypeScript, React.js* and its ecosystem. Possess foundational back-end skills, capable of building APIs with *Node.js and Express*. Familiar with Docker containerization and CI/CD practices.
-
       *Visa Status:* IANG and available for work from Sep 2025.\
       *Languages:* Putonghua (Native), Cantonese (Beginner), English (Intermediate).
 
+      #additional-block[
+  #text(weight: "bold")[Summary]\
+   Master of Computing student with a strong foundation in Web Development (React, Node.js) and a passion for open-source.  *An open-source contributor with merged pull requests in world-class projects, including #link("https://github.com/reactjs/react.dev/pull/6509")[React.js] and #link("https://github.com/nodejs/node/pull/54569")[Node.js] *. Seeking a Frontend or Full-Stack Developer role to build high-quality web applications.
+]
     ]
   ]
 )
 
+== Technical Skills
+#chiline()
+- *Languages:* TypeScript, JavaScript, Python, HTML5, CSS3
+- *Frontend:* React.js, Next.js, Vue.js, Vite, TailwindCSS, ECharts, Three.js
+- *Backend:* Express.js, Node.js
+- *Databases:* PostgreSQL, MongoDB
+- *Tools & DevOps:* Git, Docker, CI/CD (GitHub Actions, Jenkins)
+
+
 == Work Experience
 #chiline()
 
-*Web3.0 Technology Limited* - Frontend Developer Intern #h(1fr) Nov 2024 - Apr 2025, Hong Kong\
+*Web3.0 Technology Limited*  #h(1fr) Nov 2024 - Apr 2025, Hong Kong\
+#link("https://daviddong.me/projects/dapp")[Decentralized Application] #h(1fr) Frontend Developer Intern \
 
-*PKU-Changsha Institute for Computing and Digital Economy* - Frontend Developer #h(1fr) Jul 2023 - Jul 2024, Changsha \
++ Replaced state-driven navigation with Next.js App Router, optimizing load speed by 20% and bundle size by 40%.
++ Customized types based on the abitype library, enabling named attribute access for read contract data.
 
-*Tencent Music Entertainment* - Frontend Developer Intern #h(1fr) May 2022 - Oct 2022, Shenzhen \
+*PKU-Changsha Institute for Computing and Digital Economy*  #h(1fr) Jul 2023 - Jul 2024, Changsha \
+#link("https://daviddong.me/projects/chatbot")[LLM-based AI Medical Assistant] #h(1fr) Frontend Developer \
++ Built front-end architecture from scratch, implemented AI streaming responses using SSE.
++ Used React Query optimistic updates to resolve data synchronization latency.
++ Reduced 40% image size using Docker multi-stage for efficient deployment.
 
-== Projects
+#link("https://daviddong.me/projects/data-visualization")[Smart Campus Visualization System]
++ Developed an interactive 3D environment using Blender and Three.js. 
++ Used pre-baking lightmaps to resolve rendering lag and ensured smooth frame rates. 
++ Used Echarts to implement interactive effects like map highlighting and dynamic lines.
+
+
+*Tencent Music Entertainment* #h(1fr) May 2022 - Oct 2022, Shenzhen \
+#link("https://daviddong.me/projects/tme")[QQ Music Live Room Development] #h(1fr) Frontend Developer Intern \
+
+Contributed to developing H5 live streaming event pages for core products QQ Music and WeSing (10M+ users).
+
+
+
+== Side Projects
 #chiline()
 
-#link("https://daviddong.me/projects/dapp")[*Decentralized Application (dApp)*] - Web3.0 Technology Limited #h(1fr) 2025 \
-+ Replaced state-driven navigation with Next.js App Router, optimizing initial page load speed and bundle size.
-+ Customized types based on the abitype library, enabling named attribute access for contract data (e.g., ⁠`res.id` vs ⁠`res[0]`), enhanced code readability and type safety.
-
-#link("https://daviddong.me/projects/chatbot")[*LLM-based AI Medical Assistant*] - PKU-Changsha Institute for Computing and Digital Economy #h(1fr) 2024 \
-+ Build front-end architecture from scratch, tech stack (React, Vite, TailwindCSS, React Router, Jotai), Playwright for E2E testing, zod for user input/form validation. 
-+ Implemented AI streaming responses using SSE, used React Query optimistic updates to resolve data synchronization latency, enhancing user interaction.
-+ Using Docker, significantly reducing image size from 100MB to 20MB using multi-stage builds for efficient deployment.
-
-#link("https://daviddong.me/projects/data-visualization")[*Smart Campus Visualization System*] - PKU-Changsha Institute for Computing and Digital Economy #h(1fr) 2023 \
-+ Used Blender and Three.js to create an interactive 3D environment. Successfully resolved rendering lag and ensured smooth frame rates by pre-baking lightmaps and simplifying models. 
-+  Implemented interactive effects like map highlighting, dynamic lines using ECharts,  improve data intuitiveness
-
-#link("https://daviddong.me/projects/tme")[*QQ Music Live Room Development*] - Tencent Music Entertainment Group #h(1fr) 2022\
-+ Developed H5 live streaming pages: Core products like QQ Music and WeSing (10M+ users), ensuring event stability and user experience. 
-+ Refactored the live room gifting page for QQ Music, WeSing, and Kuwo Music into a unified, configurable React component, Improved efficiency and code reusability.
-
-*Personal Projects* #h(1fr) 2023-2025\
 + #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - Conversational PDF generation tool based on Large Language Models.
 + #link("https://daviddong.me/projects/comments")[*Comments*] - Lightweight open-source commenting system, 50+ GitHub Stars.
 + #link("https://github.com/hidaviddong/98.ui")[*98.ui*] - Windows 98 style UI component library.
-+ Open Source Contributor: Contributions to Node.js and React.js.
++ #link("https://github.com/hidaviddong/bus-station")[*Watch Bus*] - An Apple Watch app for Hong Kong bus arrival time.
 
 == Education
 #chiline()
@@ -98,7 +109,7 @@
 \ Katie Shu Sui Pui Scholarship;  Research on deep learning-based point cloud compression.
 
 *Shenzhen University* - Master of Engineering in Materials Science #h(1fr) Sep 2020 - Jun 2023, Shenzhen
-\ Second-class Campus Scholarship; Research on metal-air battery, paper published in Carbon .
+\ Second-class Campus Scholarship; Research on metal-air battery, paper published in _Carbon_ .
 
 *Hunan University of Technology* - Bachelor of Engineering in BEEE #h(1fr) Sep 2016 - Jun 2020, Zhuzhou
 
