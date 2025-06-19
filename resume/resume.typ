@@ -51,7 +51,7 @@
 
       #additional-block[
   #text(weight: "bold")[Summary]\
-   Master of Computing student with a strong foundation in Web Development (React, Node.js) and a passion for open-source.  *An open-source contributor with merged pull requests in world-class projects, including #link("https://github.com/reactjs/react.dev/pull/6509")[React.js] and #link("https://github.com/nodejs/node/pull/54569")[Node.js] *. Seeking a Frontend or Full-Stack Developer role to build high-quality web applications.
+   Master of Computing student with a strong foundation in Web Development.  *An open-source contributor with merged pull requests in world-class projects, including #link("https://github.com/reactjs/react.dev/pull/6509")[React.js] and #link("https://github.com/nodejs/node/pull/54569")[Node.js] *. Seeking a Frontend or Full-Stack Developer role to build high-quality web applications.
 ]
     ]
   ]
