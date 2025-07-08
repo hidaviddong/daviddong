@@ -46,24 +46,18 @@
     #text(size: 10pt)[
       +852 46720879 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]\
       
-      *Visa Status:* IANG and available for work from Sep 2025.\
+      *Visa Status:* Student VISA holder available for part-time/intern (Jul-Sep); *IANG VISA expected this Sep*.\
       *Languages:* Putonghua (Native), Cantonese (Beginner), English (Intermediate).
-
-      #additional-block[
-  #text(weight: "bold")[Summary]\
-   Master of Computing student with a strong foundation in Web Development.  *An open-source contributor with merged pull requests in world-class projects, including #link("https://github.com/reactjs/react.dev/pull/6509")[React.js] and #link("https://github.com/nodejs/node/pull/54569")[Node.js] *. Seeking a Frontend or Full-Stack Developer role to build high-quality web applications.
-]
     ]
   ]
 )
 
 == Technical Skills
 #chiline()
-- *Languages:* TypeScript, JavaScript, Python, HTML5, CSS3
-- *Frontend:* React.js, Next.js, Vue.js, Vite, TailwindCSS, ECharts, Three.js
-- *Backend:* Express.js, Node.js
-- *Databases:* PostgreSQL, MongoDB
-- *Tools & DevOps:* Git, Docker, CI/CD (GitHub Actions, Jenkins)
+- *Languages:* TypeScript, JavaScript, HTML5, CSS3, Python, SQL
+- *Frontend:* *React.js* (Next.js, React Router, Zustand), Vite, TailwindCSS, ESLint, Prettier.
+- *Backend & Databases:* Node.js, Express.js, PostgreSQL, MongoDB, Redis
+- *Testing & DevOps:* Jest/Vitest (Unit), Playwright (Integration/E2E), Docker, CI/CD (GitHub Actions), Git
 
 
 == Work Experience
@@ -72,35 +66,37 @@
 *Web3.0 Technology Limited*  #h(1fr) Nov 2024 - Apr 2025, Hong Kong\
 #link("https://daviddong.me/projects/dapp")[Decentralized Application] #h(1fr) Frontend Developer Intern \
 
-+ Replaced state-driven navigation with Next.js App Router, optimizing load speed by 20% and bundle size by 40%.
-+ Customized types based on the abitype library, enabling named attribute access for read contract data.
+- Integrated the DApp using ⁠Next.js and Wagmi, developing core features including token staking and withdrawal.
+- Designed a Node.js script to analyze user staking behavior by querying transaction histories via the Polygon API.
 
 *PKU-Changsha Institute for Computing and Digital Economy*  #h(1fr) Jul 2023 - Jul 2024, Changsha \
 #link("https://daviddong.me/projects/chatbot")[LLM-based AI Medical Assistant] #h(1fr) Frontend Developer \
-+ Built front-end architecture from scratch, implemented AI streaming responses using SSE.
-+ Used React Query optimistic updates to resolve data synchronization latency.
-+ Reduced 40% image size using Docker multi-stage for efficient deployment.
+- Developed the frontend from scratch using React and Vite, implementing real-time AI responses with SSE.
+- Managed streaming data flow by updating the React Query cache, ensuring a seamless, real-time user experience.
+- Engineered the deployment pipeline, reducing Docker image size by 40% through multi-stage builds.
 
 #link("https://daviddong.me/projects/data-visualization")[Smart Campus Visualization System]
-+ Developed an interactive 3D environment using Blender and Three.js. 
-+ Used pre-baking lightmaps to resolve rendering lag and ensured smooth frame rates. 
-+ Used Echarts to implement interactive effects like map highlighting and dynamic lines.
+- Developed an interactive 3D environment using Blender and Three.js and used pre-baking  to resolve rendering lag.
+- Built an interactive map module using ECharts, featuring custom markers and data annotations.
 
 
 *Tencent Music Entertainment* #h(1fr) May 2022 - Oct 2022, Shenzhen \
 #link("https://daviddong.me/projects/tme")[QQ Music Live Room Development] #h(1fr) Frontend Developer Intern \
 
-Contributed to developing H5 live streaming event pages for core products QQ Music and WeSing (10M+ users).
+- Contributed to developing H5 live streaming event pages for core products QQ Music and WeSing.
 
 
 
 == Side Projects
 #chiline()
 
-+ #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - Conversational PDF generation tool based on Large Language Models.
-+ #link("https://daviddong.me/projects/comments")[*Comments*] - Lightweight open-source commenting system, 50+ GitHub Stars.
-+ #link("https://github.com/hidaviddong/98.ui")[*98.ui*] - Windows 98 style UI component library.
-+ #link("https://github.com/hidaviddong/bus-station")[*Watch Bus*] - An Apple Watch app for Hong Kong bus arrival time.
+- #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - Conversational PDF generation tool based on Large Language Models.
+- #link("https://daviddong.me/projects/comments")[*Comments*] - Lightweight open-source commenting system, 50+ GitHub Stars.
+- #link("https://daviddong.me/projects/98ui")[*98.ui*] - Windows 98 style UI component library.
+- #link("https://daviddong.me/projects/watchbus")[*Watch Bus*] - An Apple Watch app for Hong Kong bus arrival time.
+- An open-source contributor *including #link("https://github.com/reactjs/react.dev/pull/6509")[React.dev] and #link("https://github.com/nodejs/node/pull/54569")[Node.js]*
+
+
 
 == Education
 #chiline()
