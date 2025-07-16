@@ -11,7 +11,10 @@ RUN npm install --omit=dev
 FROM base AS build-deps
 RUN npm install
 RUN npm install playwright
-RUN npx playwright install --with-deps chromium
+
+RUN apk add --no-cache udev ttf-freefont chromium
+
+RUN npx playwright install chromium
 
 FROM build-deps AS build
 COPY . .
