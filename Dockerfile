@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS base
+FROM node:lts AS base
 WORKDIR /app
 
 # By copying only the package.json and package-lock.json here, we ensure that the following `-deps` steps are independent of the source code.
@@ -12,41 +12,17 @@ FROM base AS build-deps
 RUN npm install
 RUN npm install playwright
 
-RUN apk add --no-cache \
-    chromium \
-    nss \
-    freetype \
-    harfbuzz \
-    ca-certificates \
-    ttf-freefont \
-    fontconfig \
-    udev \
-    libx11 \
-    libxcomposite \
-    libxcursor \
-    libxdamage \
-    libxext \
-    libxfixes \
-    libxi \
-    libxrandr \
-    libxrender \
-    libxss \
-    libxtst \
-    gdk-pixbuf \
-    cairo \
-    pango \
-    at-spi2-atk \
-    dbus-libs
-
-RUN npx playwright install chromium
+RUN npx playwright install --with-deps chromium
 
 FROM build-deps AS build
 COPY . .
 RUN npm run build
 
-FROM base AS runtime
+FROM node:lts-slim AS runtime
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY --from=build /root/.cache/ms-playwright ./.cache/ms-playwright
+
 
 ENV HOST=0.0.0.0
 ENV PORT=4321
