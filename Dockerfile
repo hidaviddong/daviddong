@@ -12,7 +12,31 @@ FROM base AS build-deps
 RUN npm install
 RUN npm install playwright
 
-RUN apk add --no-cache udev ttf-freefont chromium
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont \
+    fontconfig \
+    udev \
+    libx11 \
+    libxcomposite \
+    libxcursor \
+    libxdamage \
+    libxext \
+    libxfixes \
+    libxi \
+    libxrandr \
+    libxrender \
+    libxss \
+    libxtst \
+    gdk-pixbuf \
+    cairo \
+    pango \
+    at-spi2-atk \
+    dbus-libs
 
 RUN npx playwright install chromium
 
