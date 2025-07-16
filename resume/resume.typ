@@ -54,11 +54,10 @@
 
 == Technical Skills
 #chiline()
-- *Languages:* TypeScript, JavaScript, HTML5, CSS3, Python, SQL
-- *Frontend:* *React.js* (Next.js, React Router, Zustand), Vite, TailwindCSS, ESLint, Prettier.
-- *Backend & Databases:* Node.js, Express.js, PostgreSQL, MongoDB, Redis
-- *Testing & DevOps:* Jest/Vitest (Unit), Playwright (Integration/E2E), Docker, CI/CD (GitHub Actions), Git
-
+- *Languages:* TypeScript, JavaScript, Python, SQL, HTML5, CSS3
+- *Frontend:* React.js (Next.js), Vue.js, TailwindCSS, Vite
+- *Backend:* Node.js, Express.js, PostgreSQL, MongoDB, Redis
+- *Testing & DevOps:* Jest, Playwright, Docker, Git, CI/CD (GitHub Actions)
 
 == Work Experience
 #chiline()
@@ -91,6 +90,7 @@
 #chiline()
 
 - #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - Conversational PDF generation tool based on Large Language Models.
+- #link("https://daviddong.me/projects/polymarket-tg-agent")[*Polymarket-tg-agent*] - A Telegram AI Bot based on Polymarket API and Grok.
 - #link("https://daviddong.me/projects/comments")[*Comments*] - Lightweight open-source commenting system, 50+ GitHub Stars.
 - #link("https://daviddong.me/projects/98ui")[*98.ui*] - Windows 98 style UI component library.
 - #link("https://daviddong.me/projects/watchbus")[*Watch Bus*] - An Apple Watch app for Hong Kong bus arrival time.
@@ -123,14 +123,13 @@
     = 董皓宇
     #v(0.5em)
     #text(size: 10pt )[
-      19926690273 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]
+      +852 46720879 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]
 
-      男, 1999年出生于湖南益阳，现居香港。目前正在寻求一份软件开发岗位。\
-  
-      我有三年前端开发经验，参与过*大语言模型应用、去中心化应用、中后台管理系统*的开发。
+      *个人简介*：男, 1999年出生于湖南益阳，现居香港。拥有三年前端开发经验，参与过大语言模型应用、去中心化应用、后台管理系统等多类项目，熟悉 *TypeScript、React.js、Vue.js* 等前 Web 开发技术，具备扎实的工程实践能力和团队协作能力。\
 
-      熟练掌握前端开发技术栈 *TypeScipt, React.js* 以及周边生态的使用。具备基础后端开发能力，能够使用 *Node.js, Express* 构建 API 服务。了解 Docker 容器化工具以及CICD 的实践。
-    
+      *签证状况*：目前持香港学生签证（可实习/兼职，预计 *2025 年 9 月* 获得 IANG 签证）。\
+
+      *语言能力*：普通话（母语），粤语（初级），英语（中级）。
     ]
   ],
   block(
@@ -143,44 +142,42 @@
   )
 )
 
+== 技能
+#chiline()
+- *Languages:* TypeScript, JavaScript, Python, SQL, HTML5, CSS3
+- *Frontend:* React.js (Next.js), Vue.js, TailwindCSS, Vite
+- *Backend:* Node.js, Express.js, PostgreSQL, MongoDB, Redis
+- *Testing & DevOps:* Jest, Playwright, Docker, Git, CI/CD (GitHub Actions)
+
 == 工作经历
 #chiline()
 
 *Web3.0 Technology Limited* - 前端开发实习生 #h(1fr) 2024 年 11 月 - 2025 年 4 月，香港\
+#link("https://daviddong.me/projects/dapp")[DApp去中心化应用]\
++ 负责基于 Next.js 和 Wagmi 集成去中心化应用，开发代币质押、提现前端核心功能模块。
++ 设计并实现 Node.js 脚本，通过调用查询 Polygon 链上历史交易数据，自动化分析用户链上质押行为。
+
 
 *北京大学长沙计算与数字经济研究院* - 前端开发工程师 #h(1fr) 2023年7月 - 2024年7月，长沙 \
+#link("https://daviddong.me/projects/chatbot")[基于大语言模型的 AI 诊疗助手]\
++ 从零搭建 AI 医疗助手前端，采用 React 与 Vite 架构，集成 SSE 实现 AI 实时流式回复，极大提升了用户交互体验。\
++ 利用 React Query 缓存机制，优化流式数据同步与界面实时更新，确保数据展示的流畅性和一致性。\
++ 优化部署流程，采用 Docker 多阶段构建，将镜像体积缩小 40%，显著提升了部署效率和资源利用率。\
+#link("https://daviddong.me/projects/data-visualization")[智慧园区可视化系统]\
++ 使用 Blender 和 Three.js 搭建可交互 3D 场景，通过预烘焙技术解决渲染卡顿问题，提升系统性能。\
++ 基于 ECharts 开发园区数据可视化模块，实现自定义地图标记与数据注释，增强数据展示的直观性。
 
 *腾讯音乐娱乐集团* - 前端开发实习生 #h(1fr)  2022年5月 - 2022年10月，深圳 \
-
-== 项目经历
+#link("https://daviddong.me/projects/tme")[QQ 音乐直播间活动页开发]\
++ 参与 QQ 音乐、全民 K 歌等核心产品的 H5 直播活动页面开发，保障了高并发场景下的页面稳定性与用户体验。
+== 个人项目
 #chiline()
-
-#link("https://daviddong.me/projects/dapp")[*DApp去中心化应用*] - Web3.0 Technology Limited #h(1fr) 2025 \
-+ 主导应用路由重构：引入 Next.js App Router 替代旧有状态驱动导航，显著提升页面初始加载速度并优化了代码架构。
-+ 改进智能合约交互体验：在abitype 库的基础上自定义类型，实现了合约数据的具名属性访问 (e.g., `⁠res.id` vs ⁠`res[0]`)，大幅增强了代码可读性与类型安全性。
-
-#link("https://daviddong.me/projects/chatbot")[*基于大语言模型的 AI 诊疗助手*] - 北京大学长沙计算与数字经济研究院 #h(1fr) 2024 \
-+ 从零主导前端架构与部署优化：独立完成技术选型 (React, Vite, TailwindCSS, React Router, Jotai)，引入 Playwright 进行E2E测试，zod 进行用户输入和表单校验。
-
-+ 打造流畅AI对话核心体验：运用SSE实现AI流式响应，并使用React Query乐观更新解决数据同步延迟问题，使用 remark 解析生成的markdown及实现动态光标效果，全面提升用户交互友好度。
-
-+ 将项目进行容器化改造：利用Docker多阶段构建技术，将镜像从100MB显著压缩至20MB，实现高效部署。
-
-
-#link("https://daviddong.me/projects/data-visualization")[*智慧园区可视化系统*] - 北京大学长沙计算与数字经济研究院 #h(1fr) 2023 \
-+ 构建交互式3D场景： 运用 Blender 与 Three.js 搭建可交互3D环境，通过预烘焙光照贴图及模型精简，成功解决渲染卡顿问题，确保了流畅帧率。
-+ 开发可视化模块： 基于 ECharts 实现地图标记高亮、动态飞线及数据渐变等多种交互效果，显著提升了园区运营数据的呈现直观性。
-
-#link("https://daviddong.me/projects/tme")[*QQ 音乐直播间活动页开发*] - 腾讯音乐娱乐集团 #h(1fr) 2022\
-+ 参与千万级用户平台直播H5活动页开发： 为QQ音乐，全民K歌等核心产品开发交互式直播运营活动（如绿钻抽奖，页面小游戏等），保障了活动的稳定性和用户体验。
-+ 跨App核心组件统一： 针对QQ音乐/全民K歌/懒人听书的直播间送礼榜单，重构为统一可配置React组件，显著提升迭代效率、代码复用率，并确保了三大平台视觉与交互的一致性。
-
-*独立开发项目* #h(1fr) 2023-2025\
 + #link("https://daviddong.me/projects/autopdf")[*AutoPDF*] - 基于大语言模型的对话式PDF生成工具。
++ #link("https://daviddong.me/projects/polymarket-tg-agent")[*Polymarket-tg-agent*] - 基于 Polymarket API 和 Grok 的Telegram 机器人。
 + #link("https://daviddong.me/projects/comments")[*Comments*] - 轻量级开源评论系统，GitHub Star 50+，阮一峰周刊推荐。
 + #link("https://github.com/hidaviddong/98.ui")[*98.ui*] - 复刻Windows 98风格的前端UI组件库。
-+ 积极参与开源社区：Node.js、React.js 贡献者。
-
++ #link("https://daviddong.me/projects/watchbus")[*Watch Bus*] - Apple Watch App, 可以查看当前站台的巴士到站时间。
++ 积极贡献开源社区：*#link("https://github.com/reactjs/react.dev/pull/6509")[React.dev] 和 #link("https://github.com/nodejs/node/pull/54569")[Node.js]* 贡献者。
 
 == 教育经历
 #chiline()

@@ -10,7 +10,6 @@ type: "个人"
 
 <div align="center">
 
-
 ![polymarket-telegram-agent](../assets/polymarket-tg-agent/agent.gif)
 
 </div>
