@@ -44,17 +44,17 @@
     = DONG, Haoyu (David) / 董皓宇
     #v(0.5em)
     #text(size: 10pt)[
-      +852 46720879 / hidaviddong\@gmail.com / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]\
+      +852 46720879 / hidaviddong\@gmail.com / hidaviddong [WeChat] / #link("https://github.com/hidaviddong")[GitHub] / #link("https://daviddong.me")[Website]\
       
-      *Visa Status:* Student VISA holder available for part-time/intern (Jul-Sep); *IANG VISA expected this Sep*.\
-      *Languages:* Putonghua (Native), Cantonese (Beginner), English (Intermediate).
+      *Visa Status:* Immigration Arrangements for Non-local Graduates (IANG).\
+      *Languages:* Putonghua (Native), Cantonese (Intermediate), English (Intermediate).
     ]
   ]
 )
 
 == Technical Skills
 #chiline()
-- *Languages:* TypeScript, JavaScript, Python, SQL, HTML5, CSS3
+- *Languages:* JavaScript,  HTML, CSS, Python, SQL
 - *Frontend:* React.js (Next.js), Vue.js, TailwindCSS, Vite
 - *Backend:* Node.js, Express.js, PostgreSQL, MongoDB, Redis
 - *Testing & DevOps:* Jest, Playwright, Docker, Git, CI/CD (GitHub Actions)
