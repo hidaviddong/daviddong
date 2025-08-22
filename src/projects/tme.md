@@ -1,5 +1,5 @@
 ---
-title: "Q 音/全民 K 歌直播间游戏"
+title: "QQ 音乐"
 date: "2022"
 type: "工作"
 ---
