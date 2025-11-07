@@ -1,14 +1,56 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+
+const projects = await getCollection("projects");
+const projectsByYear = projects.reduce<Record<string, typeof projects>>((acc, project) => {
+  const year = project.data.date;
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(project);
+  return acc;
+}, {});
+
+const sortedYears = Object.keys(projectsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
 <Layout
   className="flex h-svh max-w-sm flex-col justify-center"
 >
-<main class="space-y-4">
-  <p class="text-3xl font-bold">董皓宇（David）</p>
-  <p>三年的前端开发经验, 曾在腾讯音乐和北大研究院实习和工作过，具备AI应用层、前端 dApp、数据可视化开发的实践经验。</p>
-  <p>目前正在寻求一些新的工作机会，欢迎<a href="/resume.pdf" class="underline cursor-pointer">联系我</a> 👋。</p>
+<main class="space-y-8">
+  <p class="text-3xl font-bold">David</p>
+  
+  <div class="flex flex-col gap-6">
+    {sortedYears.map((year) => (
+      <div class="flex flex-col gap-3">
+        <h2 class="text-xl font-mono text-neutral-500">{year}</h2>
+        
+        <ul class="flex flex-col gap-1.5">
+          {projectsByYear[year].map((project) => (
+            <li>
+              <a
+                href={`/projects/${project.id}`}
+                class="group flex items-center gap-3"
+              >
+                <span class="group-hover:underline">{project.data.title}</span>
+                <span 
+                  class={`
+                    text-xs px-2 py-0.5 rounded-full
+                    ${project.data.type === "个人" 
+                      ? "bg-blue-100 text-blue-800" 
+                      : "bg-green-100 text-green-800"}
+                  `}
+                >
+                  {project.data.type}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
 </main>
  
 </Layout>

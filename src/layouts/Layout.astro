@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
-import NavLink from "../components/NavLink.astro";
 ---
 
 <html lang="en" class="h-full">
@@ -38,9 +37,6 @@ import NavLink from "../components/NavLink.astro";
     class="font-sans text-neutral-900 bg-neutral-50 antialiased transition-colors min-h-full flex flex-col justify-center items-center"
   >
     <div class="w-xs sm:w-xl mx-auto p-4 selection:bg-blue-100 selection:text-blue-500">
-		<header class="mb-6 flex items-center justify-between" transition:name="header">
-			 <NavLink/>
-		</header>
       <slot />
     </div>
   </body>
