@@ -2,6 +2,8 @@
 title: "QQ 音乐"
 date: "2022"
 type: "工作"
+description: "参与混合移动端应用开发，包括直播间内抽奖小游戏和互通榜单。"
+cover: "../assets/tme/game.gif"
 ---
 
 参与混合移动端应用开发。

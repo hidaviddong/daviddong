@@ -2,6 +2,8 @@
 title: "QRCode Login"
 date: "2025"
 type: "个人"
+description: "一个极简的二维码扫码登录系统"
+cover: "../assets/qrcode/demo.gif"
 ---
 
 一个极简的二维码扫码登录系统
@@ -49,4 +51,3 @@ sequenceDiagram
 ```
 
 <center class="mt-4">流程图</center>
-

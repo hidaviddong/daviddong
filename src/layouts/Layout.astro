@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
+
+const { class: className } = Astro.props;
 ---
 
 <html lang="en" class="h-full">
@@ -36,7 +38,7 @@ import { ClientRouter } from "astro:transitions";
   <body
     class="font-sans text-neutral-900 bg-neutral-50 antialiased transition-colors min-h-full flex flex-col justify-center items-center"
   >
-    <div class="w-xs sm:w-xl mx-auto p-4 selection:bg-blue-100 selection:text-blue-500">
+    <div class:list={["mx-auto p-4 selection:bg-blue-100 selection:text-blue-500", className || "w-xs sm:w-xl"]}>
       <slot />
     </div>
   </body>

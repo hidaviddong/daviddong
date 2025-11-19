@@ -2,6 +2,8 @@
 title: "数据可视化项目"
 date: "2024"
 type: "工作"
+description: "包含智慧园区建模、B 端可视化系统地图动效、EEG-X 人工智能脑电分析平台等多个数据可视化项目。"
+cover: "../assets/data-visualization/model.webp"
 ---
 
 ## 智慧园区

@@ -2,6 +2,8 @@
 title: "Polymarket Telegram Agent"
 date: "2025"
 type: "个人"
+description: "基于 Grok 和 Polymarket API的 Agent，输入交易事件链接，Agent 会自动搜寻相关事件，并给出投资建议。"
+cover: "../assets/polymarket-tg-agent/agent.gif"
 ---
 
 基于 Grok 和 Polymarket API的 Agent，输入交易事件链接，Agent 会自动搜寻相关事件，并给出投资建议。

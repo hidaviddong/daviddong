@@ -2,6 +2,8 @@
 title: "Next Media"
 date: "2025"
 type: "个人"
+description: "一个 Web 端的媒体管理库，类似 Jellyfin 和 Emby"
+cover: "../assets/next-media/poster.png"
 ---
 
 一个 Web 端的媒体管理库，类似 Jellyfin 和 Emby
@@ -66,7 +68,3 @@ type: "个人"
 
 </div>
 <center>HLS 播放</center>
-
-
-
-

@@ -2,6 +2,8 @@
 title: "Watch Bus"
 date: "2025"
 type: "个人"
+description: "Apple Watch 应用，用于查看最近几趟香港巴士的到站时间。"
+cover: "../assets/watchbus/watchbus.gif"
 ---
 
 

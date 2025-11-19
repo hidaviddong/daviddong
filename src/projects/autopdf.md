@@ -2,6 +2,8 @@
 title: "AutoPDF"
 date: "2025"
 type: "个人"
+description: "通过对话，生成任意 PDF 的网页。"
+cover: "../assets/autopdf/resume.png"
 ---
 
 通过对话，生成任意 PDF 的网页。

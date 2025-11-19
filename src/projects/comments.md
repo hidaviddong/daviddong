@@ -2,6 +2,8 @@
 title: "Comments"
 date: "2024"
 type: "个人"
+description: "一个可以轻松集成到任何网站的轻量级评论系统，是 Vercel Comments 的开源替代品。"
+cover: "../assets/comments/comments.gif"
 ---
 
 一个可以轻松集成到任何网站的轻量级评论系统，是 Vercel Comments 的开源替代品。
