@@ -1,28 +1,23 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import node from "@astrojs/node";
+import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
-import rehypeMermaid from 'rehype-mermaid';
-
 // https://astro.build/config
 export default defineConfig({
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: cloudflare(),
   vite: {
     plugins: [tailwindcss()],
   },
   markdown: {
     syntaxHighlight: {
-      type: 'shiki',
-      excludeLangs: ['mermaid', 'math'],
+      type: "shiki",
+      excludeLangs: ["math"],
     },
     shikiConfig: {
       themes: {
         light: "catppuccin-latte",
         dark: "catppuccin-mocha",
-      },    
+      },
     },
-    rehypePlugins: [rehypeMermaid],  
   },
 });
