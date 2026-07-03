@@ -1,5 +1,4 @@
-import type { ComponentType } from "react"
-import { AboutWindow } from "@/features/windows/AboutWindow"
+import type { ComponentType, CSSProperties } from "react"
 import { ProjectsWindow } from "@/features/windows/ProjectsWindow"
 import { ContactWindow } from "@/features/windows/ContactWindow"
 import { ResumeWindow } from "@/features/windows/ResumeWindow"
@@ -26,18 +25,14 @@ export interface AppDef {
   Icon: ComponentType<IconProps>
   label: string
   width: number
+  // Fixed default height (windows without one hug their content).
+  height?: number
+  // Overrides for the window content area, e.g. edge-to-edge chrome.
+  contentStyle?: CSSProperties
   Content: ComponentType
 }
 
 export const APPS: Record<string, AppDef> = {
-  about: {
-    id: "about",
-    title: "About Me.txt",
-    Icon: DocumentIcon,
-    label: "About Me",
-    width: 380,
-    Content: AboutWindow,
-  },
   projects: {
     id: "projects",
     title: "Projects",
@@ -75,7 +70,9 @@ export const APPS: Record<string, AppDef> = {
     title: "Terminal — zsh",
     Icon: TerminalIcon,
     label: "Terminal",
-    width: 384,
+    width: 480,
+    height: 360,
+    contentStyle: { padding: 0, overflow: "hidden", display: "flex", flexDirection: "column" },
     Content: TerminalWindow,
   },
   tuner: {
@@ -98,7 +95,6 @@ export const APPS: Record<string, AppDef> = {
 
 // Order used for the desktop icons and dock.
 export const APP_ORDER = [
-  "about",
   "projects",
   "snippets",
   "contact",

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import type { ReactNode } from "react"
-import { APPS, APP_ORDER } from "./apps"
+import { APPS } from "./apps"
 import { TrashIcon } from "./icons"
 
 interface DockIconProps {
@@ -39,14 +39,15 @@ function DockIcon({ icon, label, running, onClick }: DockIconProps) {
 }
 
 interface DockProps {
+  order: string[]
   openIds: string[]
   onOpen: (id: string) => void
 }
 
-export function Dock({ openIds, onOpen }: DockProps) {
+export function Dock({ order, openIds, onOpen }: DockProps) {
   return (
     <div className="absolute bottom-2.5 left-1/2 z-[900] flex -translate-x-1/2 items-end gap-1.5 rounded-[18px] bg-dock px-2.5 py-1.5 shadow-[var(--shadow-dock),inset_0_1px_0_0_rgba(255,255,255,0.5)] backdrop-blur-[20px]">
-      {APP_ORDER.map((id) => {
+      {order.map((id) => {
         const app = APPS[id]
         return (
           <DockIcon

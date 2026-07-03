@@ -59,11 +59,15 @@ export interface WindowFrameProps {
   title?: string
   icon?: ReactNode
   children?: ReactNode
-  width?: number
+  width?: number | string
   onClose?: () => void
+  onMinimize?: () => void
+  onZoom?: () => void
   active?: boolean
   footer?: ReactNode
   style?: CSSProperties
+  /** Overrides for the content area, e.g. { padding: 0 } for edge-to-edge windows. */
+  contentStyle?: CSSProperties
   /** Extra props for the title bar, e.g. pointer handlers to make it a drag handle. */
   titleBarProps?: React.HTMLAttributes<HTMLDivElement>
 }
@@ -74,9 +78,12 @@ function WindowFrame({
   children,
   width = 380,
   onClose,
+  onMinimize,
+  onZoom,
   active = true,
   footer,
   style,
+  contentStyle,
   titleBarProps,
 }: WindowFrameProps) {
   return (
@@ -111,8 +118,8 @@ function WindowFrame({
       >
         <div style={{ display: "flex", gap: 7 }}>
           <TrafficLight kind="close" active={active} onClick={onClose} />
-          <TrafficLight kind="minimize" active={active} onClick={() => {}} />
-          <TrafficLight kind="zoom" active={active} onClick={() => {}} />
+          <TrafficLight kind="minimize" active={active} onClick={onMinimize} />
+          <TrafficLight kind="zoom" active={active} onClick={onZoom} />
         </div>
         <span
           style={{
@@ -139,7 +146,10 @@ function WindowFrame({
           </span>
         </span>
       </div>
-      <div style={{ padding: 14, flex: 1 }}>{children}</div>
+      {/* minHeight 0 + overflow auto so a fixed-height (resized) window scrolls */}
+      <div style={{ padding: 14, flex: 1, minHeight: 0, overflow: "auto", ...contentStyle }}>
+        {children}
+      </div>
       {footer && (
         <div
           style={{

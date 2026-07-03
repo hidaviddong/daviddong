@@ -1,13 +1,14 @@
-import { APPS, APP_ORDER } from "./apps"
+import { APPS } from "./apps"
 
 interface DesktopIconsProps {
+  order: string[]
   onOpen: (id: string) => void
 }
 
-export function DesktopIcons({ onOpen }: DesktopIconsProps) {
+export function DesktopIcons({ order, onOpen }: DesktopIconsProps) {
   return (
     <div className="absolute right-5 top-11 grid grid-cols-[76px] gap-4">
-      {APP_ORDER.map((id) => {
+      {order.map((id) => {
         const app = APPS[id]
         return (
           <button

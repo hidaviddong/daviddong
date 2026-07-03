@@ -8,12 +8,12 @@ export const profile = {
   fullName: "董皓宇 · DONG, Haoyu",
   handle: "hidaviddong",
   bornYear: 1999,
-  tagline: "Software engineer, born in '99.",
-  location: "Hong Kong",
+  tagline: "",
+  location: "",
   about:
-    "1999 年出生于湖南，现居香港。拥有三年前端开发经验，参与过大语言模型应用、去中心化应用、后台管理系统等多类项目，熟悉 TypeScript、React.js、Vue.js 等 Web 开发技术。",
-  visa: "Immigration Arrangements for Non-local Graduates (IANG).",
-  languages: "普通话（母语）· 粤语（初级）· 英语（中级）",
+    "我是 David，这是我的作品集。最近在捣鼓 AI Agent 相关应用，欢迎来玩。",
+  visa: "",
+  languages: "",
   links: {
     email: "hidaviddong@gmail.com",
     github: "https://github.com/hidaviddong",
