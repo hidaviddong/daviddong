@@ -5,6 +5,52 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ---- macOS (Aqua) design tokens exposed to Tailwind utilities ----
+   Source values live in src/components/macos/styles.css.
+   This maps them so we can write bg-window, text-primary, font-chrome, etc. */
+@theme inline {
+  /* colors / surfaces */
+  --color-window: var(--surface-window);
+  --color-window-alt: var(--surface-window-alt);
+  --color-tooltip: var(--surface-tooltip);
+  --color-menubar: var(--surface-menubar);
+  --color-dock: var(--surface-dock);
+  --color-gray-050: var(--gray-50);
+  --color-gray-100t: var(--gray-100);
+  --color-gray-200t: var(--gray-200);
+  --color-gray-300t: var(--gray-300);
+
+  /* text */
+  --color-primary-ink: var(--text-primary);
+  --color-secondary-ink: var(--text-secondary);
+  --color-link: var(--text-link);
+  --color-on-tooltip: var(--text-on-tooltip);
+  --color-terminal-green: var(--terminal-green);
+
+  /* accents */
+  --color-accent-500t: var(--accent-500);
+
+  /* fonts */
+  --font-chrome: var(--font-chrome);
+  --font-body: var(--font-body);
+  --font-ui: var(--font-ui);
+  --font-mono2: var(--font-mono);
+
+  /* font sizes */
+  --text-chrome-sm: var(--text-chrome-sm);
+  --text-chrome-md: var(--text-chrome-md);
+  --text-chrome-lg: var(--text-chrome-lg);
+  --text-body-xs: var(--text-body-xs);
+  --text-body-sm: var(--text-body-sm);
+  --text-body-md: var(--text-body-md);
+  --text-body-lg: var(--text-body-lg);
+
+  /* radii */
+  --radius-aqua-sm: var(--radius-sm);
+  --radius-aqua-md: var(--radius-md);
+  --radius-aqua-lg: var(--radius-lg);
+}
+
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Geist Variable', sans-serif;
