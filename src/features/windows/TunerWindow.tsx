@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react"
 import { Button, Select, Separator } from "@/components/macos"
-
-const NOTE_NAMES = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
-
-const midiToFreq = (m: number) => 440 * 2 ** ((m - 69) / 12)
-const midiToName = (m: number) => `${NOTE_NAMES[m % 12]}${Math.floor(m / 12) - 1}`
+import { NOTE_NAMES, midiToFreq, midiToName, playPluck } from "@/lib/music"
 
 // Strings are listed low → high (6th string first).
 const TUNINGS = [
@@ -19,37 +15,6 @@ const TUNINGS = [
 
 const CUSTOM_OPTION = { value: "custom", label: "Custom（自定义）" }
 const IN_TUNE_CENTS = 5
-
-// ---- Reference tone (Karplus-Strong plucked string) ----
-
-let toneCtx: AudioContext | null = null
-
-function playPluck(freq: number) {
-  toneCtx ??= new AudioContext()
-  const ctx = toneCtx
-  if (ctx.state === "suspended") ctx.resume()
-
-  const sr = ctx.sampleRate
-  const buf = ctx.createBuffer(1, sr * 2, sr)
-  const data = buf.getChannelData(0)
-  const period = Math.round(sr / freq)
-  for (let i = 0; i < period; i++) data[i] = Math.random() * 2 - 1
-  // Two-point average feedback: the noise burst decays into a string-like tone.
-  for (let i = period; i < data.length; i++) {
-    data[i] = (data[i - period] + data[i - period + 1]) * 0.498
-  }
-
-  const src = ctx.createBufferSource()
-  src.buffer = buf
-  // The rounded period detunes slightly; playbackRate corrects it exactly.
-  src.playbackRate.value = freq / (sr / period)
-  const gain = ctx.createGain()
-  gain.gain.setValueAtTime(0.4, ctx.currentTime)
-  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2)
-  src.connect(gain)
-  gain.connect(ctx.destination)
-  src.start()
-}
 
 // ---- Pitch detection (autocorrelation) ----
 

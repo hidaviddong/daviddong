@@ -206,6 +206,34 @@ export function TunerIcon({ size = 32 }: IconProps) {
   )
 }
 
+export function ChordIcon({ size = 32 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
+      <defs>
+        <linearGradient id="hddi-chord" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#6fd88a" />
+          <stop offset="1" stopColor="#1f9d46" />
+        </linearGradient>
+        <linearGradient id="hddi-chord-gloss" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffffff" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <rect x="3" y="5" width="26" height="22" rx="3.5" fill="url(#hddi-chord)" stroke="#157a34" />
+      <rect x="4" y="6" width="24" height="9" rx="2.6" fill="url(#hddi-chord-gloss)" />
+      {/* mini chord grid */}
+      <g stroke="#ffffff" strokeOpacity="0.9" strokeWidth="1">
+        <path d="M10 11v13M14 11v13M18 11v13M22 11v13" />
+        <path d="M10 16h12M10 20h12" />
+      </g>
+      <rect x="9.4" y="10" width="13.2" height="1.8" rx="0.9" fill="#ffffff" />
+      <circle cx="14" cy="18" r="1.9" fill="#ffffff" />
+      <circle cx="22" cy="14" r="1.9" fill="#ffffff" />
+      <circle cx="18" cy="22" r="1.9" fill="#ffffff" />
+    </svg>
+  )
+}
+
 export function TrashIcon({ size = 32 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">

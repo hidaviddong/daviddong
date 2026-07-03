@@ -22,7 +22,11 @@
   },
   "observability": {
     "enabled": true
-  }
+  },
+  "kv_namespaces": [
+    // Saved chord sheets for Chords.app (see src/worker/index.ts /api/sheets).
+    { "binding": "CHORD_SHEETS", "id": "86bd89398e6a4b4784a8b2d3c6c40d03" }
+  ]
   // Future backend bindings go here, e.g.:
   // "r2_buckets": [
   //   { "binding": "ASSETS_BUCKET", "bucket_name": "daviddong-assets" }

@@ -6,6 +6,7 @@ import { ResumeWindow } from "@/features/windows/ResumeWindow"
 import { TerminalWindow } from "@/features/windows/TerminalWindow"
 import { SnippetsWindow } from "@/features/windows/SnippetsWindow"
 import { TunerWindow } from "@/features/windows/TunerWindow"
+import { ChordsWindow } from "@/features/windows/ChordsWindow"
 import {
   DocumentIcon,
   FolderIcon,
@@ -14,6 +15,7 @@ import {
   PdfIcon,
   TerminalIcon,
   TunerIcon,
+  ChordIcon,
   type IconProps,
 } from "./icons"
 
@@ -84,7 +86,24 @@ export const APPS: Record<string, AppDef> = {
     width: 400,
     Content: TunerWindow,
   },
+  chords: {
+    id: "chords",
+    title: "Chords.app",
+    Icon: ChordIcon,
+    label: "Chords",
+    width: 480,
+    Content: ChordsWindow,
+  },
 }
 
 // Order used for the desktop icons and dock.
-export const APP_ORDER = ["about", "projects", "snippets", "contact", "resume", "terminal", "tuner"]
+export const APP_ORDER = [
+  "about",
+  "projects",
+  "snippets",
+  "contact",
+  "resume",
+  "terminal",
+  "tuner",
+  "chords",
+]

@@ -23,6 +23,70 @@ app.get("/api/health", (c) =>
 // Example: return basic profile info as JSON.
 // app.get("/api/hello", (c) => c.json({ hello: "world" }))
 
+// ---- Chord sheets (Chords.app) ----
+// Stored in the CHORD_SHEETS KV namespace under "sheet:<id>". Reads are
+// public; writes require the ADMIN_TOKEN secret (sent as a Bearer token).
+
+interface SheetChord {
+  name: string
+  position: { frets: number[]; fingers: number[]; baseFret: number; barres: number[]; midi: number[] }
+}
+
+interface Sheet {
+  id: string
+  name: string
+  chords: SheetChord[]
+  updatedAt: string
+}
+
+const SHEET_PREFIX = "sheet:"
+
+app.use("/api/sheets/*", async (c, next) => {
+  if (c.req.method === "GET") return next()
+  const token = c.req.header("Authorization")?.replace(/^Bearer\s+/i, "")
+  if (!c.env.ADMIN_TOKEN || token === c.env.ADMIN_TOKEN) return next()
+  return c.json({ ok: false, error: "unauthorized" }, 401)
+})
+
+// List sheets (newest first). Name/count live in KV metadata so listing
+// doesn't need a get per sheet.
+app.get("/api/sheets", async (c) => {
+  const list = await c.env.CHORD_SHEETS.list<{ name: string; chordCount: number; updatedAt: string }>({
+    prefix: SHEET_PREFIX,
+  })
+  const sheets = list.keys
+    .map((k) => ({ id: k.name.slice(SHEET_PREFIX.length), ...k.metadata }))
+    .sort((a, b) => (b.updatedAt ?? "").localeCompare(a.updatedAt ?? ""))
+  return c.json({ ok: true, sheets })
+})
+
+app.get("/api/sheets/:id", async (c) => {
+  const sheet = await c.env.CHORD_SHEETS.get<Sheet>(SHEET_PREFIX + c.req.param("id"), "json")
+  if (!sheet) return c.json({ ok: false, error: "not_found" }, 404)
+  return c.json({ ok: true, sheet })
+})
+
+app.put("/api/sheets/:id", async (c) => {
+  const id = c.req.param("id")
+  if (!/^[a-z0-9-]{1,64}$/.test(id)) return c.json({ ok: false, error: "bad_id" }, 400)
+
+  const body = await c.req.json<Partial<Sheet>>().catch(() => null)
+  const name = typeof body?.name === "string" ? body.name.trim().slice(0, 80) : ""
+  const chords = Array.isArray(body?.chords) ? body.chords.slice(0, 200) : null
+  if (!name || !chords) return c.json({ ok: false, error: "bad_request" }, 400)
+
+  const sheet: Sheet = { id, name, chords, updatedAt: new Date().toISOString() }
+  await c.env.CHORD_SHEETS.put(SHEET_PREFIX + id, JSON.stringify(sheet), {
+    metadata: { name, chordCount: chords.length, updatedAt: sheet.updatedAt },
+  })
+  return c.json({ ok: true, sheet })
+})
+
+app.delete("/api/sheets/:id", async (c) => {
+  await c.env.CHORD_SHEETS.delete(SHEET_PREFIX + c.req.param("id"))
+  return c.json({ ok: true })
+})
+
 // Anything not matched by an /api route falls through to static assets
 // (the React SPA). The vite plugin serves ./dist via the ASSETS binding.
 app.all("*", (c) => c.env.ASSETS.fetch(c.req.raw))
