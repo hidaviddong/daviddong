@@ -1,0 +1,174 @@
+/* hidaviddong — Retro OS design tokens for macOS (Aqua) components
+   Source: claude-design/tokens/ */
+
+/* ---- base grays (Aqua platinum — cool neutrals) ---- */
+:root {
+  --gray-0: #ffffff;
+  --gray-50: #f7f7f8;
+  --gray-100: #ececee;
+  --gray-200: #e3e3e6;
+  --gray-300: #d1d1d6;
+  --gray-400: #b8b8bd;
+  --gray-500: #8e8e93;
+  --gray-600: #6e6e73;
+  --gray-700: #48484a;
+  --gray-800: #2c2c2e;
+  --gray-900: #1c1c1e;
+
+  /* ---- accent: Aqua gloss blue ---- */
+  --accent-100: #d6e8ff;
+  --accent-300: #5b9dff;
+  --accent-500: #147bf5;
+  --accent-600: #0a63d6;
+  --accent-700: #0a4fa8;
+
+  /* ---- traffic-light window controls ---- */
+  --traffic-red: #ff5f57;
+  --traffic-red-ring: #e0443e;
+  --traffic-yellow: #febc2e;
+  --traffic-yellow-ring: #d89e24;
+  --traffic-green: #28c840;
+  --traffic-green-ring: #1aad2c;
+  --traffic-inactive: #d5d5d7;
+
+  /* ---- terminal / CRT accent (scoped to Terminal easter egg) ---- */
+  --terminal-bg: #1a1a1a;
+  --terminal-green: #29ff6a;
+  --terminal-green-dim: #1a8f3f;
+  --terminal-amber: #ffb000;
+
+  /* ---- system feedback colors ---- */
+  --signal-red: #d70015;
+  --signal-red-bg: #ffe5e6;
+  --signal-yellow: #b25000;
+  --signal-yellow-bg: #fff2d9;
+  --signal-green: #1f8a3c;
+  --signal-green-bg: #e2f6e6;
+
+  /* ---- semantic aliases ---- */
+  --surface-desktop-from: #2f7ee0;
+  --surface-desktop-to: #123b73;
+  --surface-desktop: linear-gradient(165deg, var(--surface-desktop-from), var(--surface-desktop-to));
+  --surface-window: var(--gray-50);
+  --surface-window-alt: var(--gray-100);
+  --surface-inset: #ffffff;
+  --surface-titlebar-from: #f4f4f6;
+  --surface-titlebar-to: #d6d6db;
+  --surface-titlebar-inactive-from: #fbfbfc;
+  --surface-titlebar-inactive-to: #ececee;
+  --surface-tooltip: rgba(36, 36, 38, 0.95);
+  --surface-menubar: rgba(255, 255, 255, 0.78);
+  --surface-dock: rgba(255, 255, 255, 0.35);
+
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --text-disabled: var(--gray-400);
+  --text-on-titlebar: #3a3a3c;
+  --text-on-accent: #ffffff;
+  --text-on-tooltip: #ffffff;
+  --text-link: var(--accent-600);
+  --text-terminal: var(--terminal-green);
+  --text-terminal-dim: var(--terminal-green-dim);
+  --text-amber: var(--terminal-amber);
+
+  --border-light: rgba(255, 255, 255, 0.6);
+  --border-dark: rgba(0, 0, 0, 0.2);
+  --border-mid: rgba(0, 0, 0, 0.12);
+  --border-field: rgba(0, 0, 0, 0.25);
+
+  --accent-primary: var(--accent-500);
+  --accent-primary-hover: var(--accent-600);
+  --accent-focus: var(--accent-500);
+
+  --state-danger: var(--signal-red);
+  --state-danger-bg: var(--signal-red-bg);
+  --state-warning: var(--signal-yellow);
+  --state-warning-bg: var(--signal-yellow-bg);
+  --state-success: var(--signal-green);
+  --state-success-bg: var(--signal-green-bg);
+
+  /* ---- typography ---- */
+  --font-ui: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, "Figtree", sans-serif;
+  --font-chrome: var(--font-ui);
+  --font-body: var(--font-ui);
+  --font-mono: Monaco, Menlo, Consolas, "IBM Plex Mono", monospace;
+  --font-display: var(--font-ui);
+
+  --text-display-lg: 34px;
+  --text-display-md: 22px;
+  --text-chrome-lg: 15px;
+  --text-chrome-md: 13px;
+  --text-chrome-sm: 12px;
+  --text-body-lg: 15px;
+  --text-body-md: 13px;
+  --text-body-sm: 12px;
+  --text-body-xs: 11px;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-loose: 1.7;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-widest: 0.08em;
+
+  /* ---- spacing ---- */
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 6px;
+  --space-4: 8px;
+  --space-5: 12px;
+  --space-6: 16px;
+  --space-7: 20px;
+  --space-8: 24px;
+  --space-9: 32px;
+  --space-10: 48px;
+  --space-11: 64px;
+  --space-12: 96px;
+
+  --titlebar-height: 28px;
+  --menubar-height: 24px;
+  --statusbar-height: 22px;
+  --scrollbar-size: 16px;
+  --window-border-width: 2px;
+  --field-border-width: 2px;
+  --icon-grid: 32px;
+
+  /* ---- effects ---- */
+  --radius-sm: 5px;
+  --radius-md: 7px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  --bevel-raised:
+    0 1px 2px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.06);
+
+  --bevel-sunken:
+    inset 0 1px 2px rgba(0, 0, 0, 0.25);
+
+  --bevel-window:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+
+  --bevel-field:
+    inset 0 1px 3px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+
+  --shadow-window: 0 16px 32px rgba(0, 0, 0, 0.28), 0 3px 8px rgba(0, 0, 0, 0.16);
+  --shadow-menu: 0 10px 24px rgba(0, 0, 0, 0.22), 0 2px 5px rgba(0, 0, 0, 0.14);
+  --shadow-dock: 0 8px 20px rgba(0, 0, 0, 0.25);
+  --focus-ring: 0 0 0 3px rgba(20, 123, 245, 0.45);
+
+  --gloss-overlay: linear-gradient(to bottom, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0) 55%);
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+}
+
+@keyframes hdd-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}

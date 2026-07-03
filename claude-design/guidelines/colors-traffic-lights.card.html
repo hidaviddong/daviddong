@@ -1,0 +1,21 @@
+<!-- @dsCard group="Colors" viewport="700x150" subtitle="Traffic-light window controls — the defining Apple chrome detail" name="Traffic Lights" -->
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-ui);display:flex;align-items:center;gap:28px;height:150px;padding:0 24px;box-sizing:border-box;background:var(--surface-window);}
+  .item{font-size:11px;color:var(--text-secondary);display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .dot{width:34px;height:34px;border-radius:50%;}
+  .row{display:flex;gap:8px;}
+</style></head>
+<body>
+  <div class="item"><div class="dot" style="background:var(--traffic-red)"></div>--traffic-red</div>
+  <div class="item"><div class="dot" style="background:var(--traffic-yellow)"></div>--traffic-yellow</div>
+  <div class="item"><div class="dot" style="background:var(--traffic-green)"></div>--traffic-green</div>
+  <div class="item"><div class="dot" style="background:var(--traffic-inactive)"></div>inactive (unfocused window)</div>
+  <div class="item">
+    <div class="row"><div class="dot" style="width:14px;height:14px;background:var(--traffic-red)"></div><div class="dot" style="width:14px;height:14px;background:var(--traffic-yellow)"></div><div class="dot" style="width:14px;height:14px;background:var(--traffic-green)"></div></div>
+    at titlebar scale
+  </div>
+</body>
+</html>

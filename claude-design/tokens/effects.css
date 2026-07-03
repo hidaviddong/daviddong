@@ -1,0 +1,54 @@
+/*
+  Aqua trades hard 3D bevels for soft blurred shadows, gloss highlights and
+  generous rounding — the "lickable" look. Token NAMES are kept stable from
+  the system's earlier Windows pass (--bevel-*, --shadow-*, --focus-ring)
+  so every component that references them re-skinned automatically; only
+  the VALUES changed. Read --bevel-raised/--bevel-sunken as "surface
+  treatment for a control that sits above/below the page", not literally
+  a beveled edge anymore.
+*/
+:root {
+  --radius-sm: 5px;
+  --radius-md: 7px;      /* buttons, inputs, menus */
+  --radius-lg: 10px;     /* window corners */
+  --radius-pill: 999px;  /* switches, segmented controls, sliders */
+
+  /* raised = glossy button face: soft drop shadow + inner top highlight */
+  --bevel-raised:
+    0 1px 2px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.06);
+
+  /* sunken = pressed state: shadow removed, faint inner shade instead */
+  --bevel-sunken:
+    inset 0 1px 2px rgba(0, 0, 0, 0.25); /* @kind shadow */
+
+  /* window = the ~1px hairline + soft ambient edge around a panel/window body */
+  --bevel-window:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+
+  /* field = sunken text-field well */
+  --bevel-field:
+    inset 0 1px 3px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.06); /* @kind shadow */
+
+  --shadow-window: 0 16px 32px rgba(0, 0, 0, 0.28), 0 3px 8px rgba(0, 0, 0, 0.16);
+  --shadow-menu: 0 10px 24px rgba(0, 0, 0, 0.22), 0 2px 5px rgba(0, 0, 0, 0.14);
+  --shadow-dock: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+  /* soft blue halo — Aqua's signature focus treatment, not a dotted line */
+  --focus-ring: 0 0 0 3px rgba(20, 123, 245, 0.45);
+
+  --gloss-overlay: linear-gradient(to bottom, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0) 55%); /* @kind other */
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --duration-fast: 120ms; /* @kind other */
+  --duration-normal: 200ms; /* @kind other */
+  /* Aqua *does* animate — gentle fades and eases everywhere, unlike a hard-snap OS */
+}
+
+@keyframes hdd-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}

@@ -1,0 +1,122 @@
+<!-- @dsCard group="Portfolio OS" viewport="1024x680" name="Desktop" subtitle="Personal site as an Aqua-era Mac desktop — menu bar, dock, draggable windows" -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>hidaviddong — desktop</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; }
+  #root { width: 100%; height: 100vh; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="Desktop.jsx"></script>
+<script type="text/babel" src="MenuBar.jsx"></script>
+<script type="text/babel" src="Dock.jsx"></script>
+<script type="text/babel" src="AboutWindow.jsx"></script>
+<script type="text/babel" src="ProjectsWindow.jsx"></script>
+<script type="text/babel" src="BlogWindow.jsx"></script>
+<script type="text/babel" src="ContactWindow.jsx"></script>
+<script type="text/babel" src="TerminalWindow.jsx"></script>
+<script type="text/babel">
+const { WindowFrame } = window.HidaviddongDesignSystem_9acf6c;
+
+function ResumePlaceholder() {
+  return <div style={{ fontFamily: "var(--font-body)", width: 260 }}>Résumé preview placeholder — drop in a real PDF/image asset.</div>;
+}
+
+const WINDOW_DEFS = {
+  about: { title: "About Me.txt", icon: "📄", Content: window.AboutWindow, width: 380 },
+  projects: { title: "Projects", icon: "📁", Content: window.ProjectsWindow, width: 420 },
+  blog: { title: "Blog.app", icon: "📰", Content: window.BlogWindow, width: 380 },
+  contact: { title: "Contact.txt", icon: "✉️", Content: window.ContactWindow, width: 340 },
+  resume: { title: "Resume.pdf", icon: "📋", Content: ResumePlaceholder, width: 300 },
+  terminal: { title: "Terminal — zsh", icon: "⌨️", Content: window.TerminalWindow, width: 384 },
+};
+
+function DraggableWindow({ id, def, pos, zIndex, active, onClose, onFocus, onMove }) {
+  const dragRef = React.useRef(null);
+
+  function onDragStart(e) {
+    onFocus();
+    const startX = e.clientX, startY = e.clientY;
+    const origin = { ...pos };
+    function onMouseMove(ev) {
+      onMove(id, { x: origin.x + (ev.clientX - startX), y: origin.y + (ev.clientY - startY) });
+    }
+    function onMouseUp() {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+    }
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  }
+
+  return (
+    <div style={{ position: "absolute", left: pos.x, top: pos.y, zIndex }} onMouseDown={onFocus}>
+      <div onMouseDown={onDragStart} style={{ cursor: "move" }}>
+        <WindowFrame title={def.title} icon={def.icon} onClose={() => onClose(id)} width={def.width} active={active}>
+          <def.Content />
+        </WindowFrame>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [openIds, setOpenIds] = React.useState(["about"]);
+  const [positions, setPositions] = React.useState({ about: { x: 140, y: 60 } });
+  const [zOrder, setZOrder] = React.useState(["about"]);
+  const [current, setCurrent] = React.useState("about");
+
+  function openWindow(id) {
+    setOpenIds((ids) => (ids.includes(id) ? ids : [...ids, id]));
+    setPositions((p) => (p[id] ? p : { ...p, [id]: { x: 120 + Object.keys(p).length * 30, y: 60 + Object.keys(p).length * 30 } }));
+    setZOrder((z) => [...z.filter((x) => x !== id), id]);
+    setCurrent(id);
+  }
+  function closeWindow(id) {
+    setOpenIds((ids) => ids.filter((x) => x !== id));
+    setZOrder((z) => z.filter((x) => x !== id));
+  }
+  function focusWindow(id) {
+    setZOrder((z) => [...z.filter((x) => x !== id), id]);
+    setCurrent(id);
+  }
+  function moveWindow(id, pos) {
+    setPositions((p) => ({ ...p, [id]: pos }));
+  }
+
+  return (
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <window.Desktop openWindows={openIds} onIconOpen={openWindow}>
+        {openIds.map((id) => (
+          <DraggableWindow
+            key={id}
+            id={id}
+            def={WINDOW_DEFS[id]}
+            pos={positions[id] || { x: 100, y: 100 }}
+            zIndex={10 + zOrder.indexOf(id)}
+            active={current === id}
+            onClose={closeWindow}
+            onFocus={() => focusWindow(id)}
+            onMove={moveWindow}
+          />
+        ))}
+      </window.Desktop>
+      <window.MenuBar />
+      <window.Dock openIds={openIds} current={current} onOpen={openWindow} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
