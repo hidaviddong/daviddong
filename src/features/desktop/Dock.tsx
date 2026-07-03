@@ -1,14 +1,16 @@
 import { useState } from "react"
+import type { ReactNode } from "react"
 import { APPS, APP_ORDER } from "./apps"
+import { TrashIcon } from "./icons"
 
 interface DockIconProps {
-  glyph: string
+  icon: ReactNode
   label: string
   running: boolean
   onClick: () => void
 }
 
-function DockIcon({ glyph, label, running, onClick }: DockIconProps) {
+function DockIcon({ icon, label, running, onClick }: DockIconProps) {
   const [hover, setHover] = useState(false)
 
   return (
@@ -24,13 +26,13 @@ function DockIcon({ glyph, label, running, onClick }: DockIconProps) {
       )}
       <button
         onClick={onClick}
-        className="h-[46px] w-[46px] border-none bg-transparent text-[30px] transition-transform duration-[120ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:scale-110"
+        className="flex h-[46px] w-[46px] items-center justify-center border-none bg-transparent transition-transform duration-[120ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:scale-110"
       >
-        {glyph}
+        {icon}
       </button>
       <span
-        className="mt-0.5 h-1 w-1 rounded-full"
-        style={{ background: running ? "var(--text-primary)" : "transparent" }}
+        className="mt-0.5 h-1 w-1 rounded-full bg-[var(--text-primary)] transition-opacity duration-200"
+        style={{ opacity: running ? 1 : 0 }}
       />
     </div>
   )
@@ -49,7 +51,7 @@ export function Dock({ openIds, onOpen }: DockProps) {
         return (
           <DockIcon
             key={id}
-            glyph={app.icon}
+            icon={<app.Icon size={34} />}
             label={app.label}
             running={openIds.some(
               (o) => o === id || (id === "projects" && o.startsWith("project:")),
@@ -59,7 +61,7 @@ export function Dock({ openIds, onOpen }: DockProps) {
         )
       })}
       <div className="mx-1 self-stretch border-l border-black/15" />
-      <DockIcon glyph="🗑️" label="Trash" running={false} onClick={() => {}} />
+      <DockIcon icon={<TrashIcon size={34} />} label="Trash" running={false} onClick={() => {}} />
     </div>
   )
 }

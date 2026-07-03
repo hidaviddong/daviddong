@@ -1,12 +1,17 @@
+import { useRef, useState } from "react"
 import type { ReactNode } from "react"
 import { WindowFrame } from "@/components/macos"
+
+const MENUBAR_HEIGHT = 26
+// Minimum pixels of the window that must stay on screen.
+const VISIBLE_MARGIN = 80
 
 export interface WindowInstance {
   id: string
   title: string
-  icon: string
+  icon: ReactNode
   width: number
-  render: () => ReactNode
+  content: ReactNode
 }
 
 interface DraggableWindowProps {
@@ -28,43 +33,74 @@ export function DraggableWindow({
   onFocus,
   onMove,
 }: DraggableWindowProps) {
-  function onDragStart(e: React.MouseEvent) {
-    onFocus(win.id)
-    const startX = e.clientX
-    const startY = e.clientY
-    const origin = { ...pos }
+  // Play a short exit animation, then actually remove the window.
+  const [closing, setClosing] = useState(false)
+  const drag = useRef<{
+    pointerId: number
+    startX: number
+    startY: number
+    origin: { x: number; y: number }
+  } | null>(null)
 
-    function onMouseMove(ev: MouseEvent) {
-      onMove(win.id, {
-        x: origin.x + (ev.clientX - startX),
-        y: origin.y + (ev.clientY - startY),
-      })
+  function onTitleBarPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    // Don't start a drag from the traffic-light buttons.
+    if ((e.target as HTMLElement).closest("button")) return
+    e.currentTarget.setPointerCapture(e.pointerId)
+    drag.current = {
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startY: e.clientY,
+      origin: pos,
     }
-    function onMouseUp() {
-      document.removeEventListener("mousemove", onMouseMove)
-      document.removeEventListener("mouseup", onMouseUp)
-    }
-    document.addEventListener("mousemove", onMouseMove)
-    document.addEventListener("mouseup", onMouseUp)
+  }
+
+  function onTitleBarPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    const d = drag.current
+    if (!d || e.pointerId !== d.pointerId) return
+    const x = d.origin.x + (e.clientX - d.startX)
+    const y = d.origin.y + (e.clientY - d.startY)
+    onMove(win.id, {
+      x: Math.min(Math.max(x, VISIBLE_MARGIN - win.width), window.innerWidth - VISIBLE_MARGIN),
+      y: Math.min(Math.max(y, MENUBAR_HEIGHT), window.innerHeight - VISIBLE_MARGIN / 2),
+    })
+  }
+
+  function onTitleBarPointerEnd(e: React.PointerEvent<HTMLDivElement>) {
+    if (drag.current?.pointerId === e.pointerId) drag.current = null
   }
 
   return (
     <div
       className="absolute"
-      style={{ left: pos.x, top: pos.y, zIndex }}
-      onMouseDown={() => onFocus(win.id)}
+      style={{
+        left: pos.x,
+        top: pos.y,
+        zIndex,
+        animation: closing
+          ? "hdd-window-close 140ms var(--ease-standard) forwards"
+          : "hdd-window-open 190ms var(--ease-standard)",
+      }}
+      onPointerDown={() => onFocus(win.id)}
+      onAnimationEnd={() => {
+        if (closing) onClose(win.id)
+      }}
     >
-      <div className="cursor-move" onMouseDown={onDragStart}>
-        <WindowFrame
-          title={win.title}
-          icon={win.icon}
-          onClose={() => onClose(win.id)}
-          width={win.width}
-          active={active}
-        >
-          {win.render()}
-        </WindowFrame>
-      </div>
+      <WindowFrame
+        title={win.title}
+        icon={win.icon}
+        onClose={() => setClosing(true)}
+        width={win.width}
+        active={active}
+        titleBarProps={{
+          onPointerDown: onTitleBarPointerDown,
+          onPointerMove: onTitleBarPointerMove,
+          onPointerUp: onTitleBarPointerEnd,
+          onPointerCancel: onTitleBarPointerEnd,
+          style: { cursor: "move", touchAction: "none", userSelect: "none" },
+        }}
+      >
+        {win.content}
+      </WindowFrame>
     </div>
   )
 }

@@ -10,7 +10,7 @@ const CONTACTS = [
 
 export function ContactWindow() {
   return (
-    <div className="flex w-[300px] flex-col gap-2 font-body text-body-md text-primary-ink">
+    <div className="flex w-full flex-col gap-2 font-body text-body-md text-primary-ink">
       <p className="m-0 text-secondary-ink">随时联系我 👋</p>
       <Separator />
       {CONTACTS.map((c) => (

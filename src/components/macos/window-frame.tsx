@@ -64,6 +64,8 @@ export interface WindowFrameProps {
   active?: boolean
   footer?: ReactNode
   style?: CSSProperties
+  /** Extra props for the title bar, e.g. pointer handlers to make it a drag handle. */
+  titleBarProps?: React.HTMLAttributes<HTMLDivElement>
 }
 
 function WindowFrame({
@@ -75,6 +77,7 @@ function WindowFrame({
   active = true,
   footer,
   style,
+  titleBarProps,
 }: WindowFrameProps) {
   return (
     <div
@@ -91,6 +94,7 @@ function WindowFrame({
       }}
     >
       <div
+        {...titleBarProps}
         style={{
           height: "var(--titlebar-height)",
           display: "flex",
@@ -102,6 +106,7 @@ function WindowFrame({
             : "linear-gradient(to bottom, var(--surface-titlebar-inactive-from), var(--surface-titlebar-inactive-to))",
           borderBottom: "1px solid rgba(0,0,0,0.15)",
           color: "var(--text-on-titlebar)",
+          ...titleBarProps?.style,
         }}
       >
         <div style={{ display: "flex", gap: 7 }}>
@@ -112,17 +117,26 @@ function WindowFrame({
         <span
           style={{
             flex: 1,
-            textAlign: "center",
+            minWidth: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 6,
             fontSize: "var(--text-chrome-lg)",
             fontWeight: 600,
             marginRight: 54,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
           }}
         >
-          {icon && <span style={{ marginRight: 6 }}>{icon}</span>}
-          {title}
+          {icon && <span style={{ display: "inline-flex", flexShrink: 0 }}>{icon}</span>}
+          <span
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {title}
+          </span>
         </span>
       </div>
       <div style={{ padding: 14, flex: 1 }}>{children}</div>

@@ -2,7 +2,7 @@ import { snippetVideos } from "@/data/profile"
 
 export function SnippetsWindow() {
   return (
-    <div className="flex w-[360px] flex-col gap-3">
+    <div className="flex w-full flex-col gap-3">
       {snippetVideos.map((video) => (
         <iframe
           key={video}

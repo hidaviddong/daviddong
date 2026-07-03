@@ -1,6 +1,6 @@
-import { useState, useCallback } from "react"
-import type { ReactNode } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { APPS } from "./apps"
+import { DocumentIcon } from "./icons"
 import { ProjectsWindow } from "@/features/windows/ProjectsWindow"
 import { ProjectDetailWindow } from "@/features/windows/ProjectDetailWindow"
 import type { Project } from "@/data/projects"
@@ -8,55 +8,72 @@ import type { WindowInstance } from "./DraggableWindow"
 
 type Pos = { x: number; y: number }
 
+// All window state lives in one object so open/close/focus stay consistent
+// (no way for zOrder, positions and the window list to drift apart).
+// Positions are kept after close so a reopened window comes back where it was.
+interface WindowState {
+  windows: WindowInstance[]
+  positions: Record<string, Pos>
+  zOrder: string[]
+}
+
 export function useWindowManager(initialAppId = "about") {
-  const [instances, setInstances] = useState<Record<string, WindowInstance>>({})
-  const [openIds, setOpenIds] = useState<string[]>([])
-  const [positions, setPositions] = useState<Record<string, Pos>>({})
-  const [zOrder, setZOrder] = useState<string[]>([])
-  const [current, setCurrent] = useState<string | null>(null)
+  const [state, setState] = useState<WindowState>({
+    windows: [],
+    positions: {},
+    zOrder: [],
+  })
 
   const focusWindow = useCallback((id: string) => {
-    setZOrder((z) => [...z.filter((x) => x !== id), id])
-    setCurrent(id)
+    setState((s) =>
+      s.zOrder[s.zOrder.length - 1] === id
+        ? s
+        : { ...s, zOrder: [...s.zOrder.filter((x) => x !== id), id] },
+    )
   }, [])
 
   const moveWindow = useCallback((id: string, pos: Pos) => {
-    setPositions((p) => ({ ...p, [id]: pos }))
+    setState((s) => ({ ...s, positions: { ...s.positions, [id]: pos } }))
   }, [])
 
   const closeWindow = useCallback((id: string) => {
-    setOpenIds((ids) => ids.filter((x) => x !== id))
-    setZOrder((z) => {
-      const next = z.filter((x) => x !== id)
-      setCurrent(next.length ? next[next.length - 1] : null)
-      return next
-    })
+    setState((s) => ({
+      ...s,
+      windows: s.windows.filter((w) => w.id !== id),
+      zOrder: s.zOrder.filter((x) => x !== id),
+    }))
   }, [])
 
-  // Internal: register a window (bring to front, assign a cascade position).
-  const spawn = useCallback((instance: WindowInstance, render: () => ReactNode) => {
-    const inst = { ...instance, render }
-    setInstances((prev) => ({ ...prev, [inst.id]: inst }))
-    setOpenIds((ids) => (ids.includes(inst.id) ? ids : [...ids, inst.id]))
-    setPositions((p) => {
-      if (p[inst.id]) return p
-      const n = Object.keys(p).length
-      return { ...p, [inst.id]: { x: 120 + n * 30, y: 60 + n * 30 } }
+  // Register a window and bring it to front; an already-open window is only
+  // refocused. First open gets a cascade position.
+  const openWindow = useCallback((win: WindowInstance) => {
+    setState((s) => {
+      const exists = s.windows.some((w) => w.id === win.id)
+      let positions = s.positions
+      if (!positions[win.id]) {
+        const n = Object.keys(positions).length
+        positions = { ...positions, [win.id]: { x: 120 + n * 30, y: 60 + n * 30 } }
+      }
+      return {
+        windows: exists ? s.windows : [...s.windows, win],
+        positions,
+        zOrder: [...s.zOrder.filter((x) => x !== win.id), win.id],
+      }
     })
-    setZOrder((z) => [...z.filter((x) => x !== inst.id), inst.id])
-    setCurrent(inst.id)
   }, [])
 
   // Open a project detail window (one per project).
   const openProject = useCallback(
     (project: Project) => {
-      const id = `project:${project.id}`
-      spawn(
-        { id, title: `${project.title}`, icon: "📄", width: 440, render: () => null },
-        () => ProjectDetailWindow({ project }),
-      )
+      openWindow({
+        id: `project:${project.id}`,
+        title: project.title,
+        icon: <DocumentIcon size={15} />,
+        width: 440,
+        content: <ProjectDetailWindow project={project} />,
+      })
     },
-    [spawn],
+    [openWindow],
   )
 
   // Open a top-level app window by id.
@@ -64,40 +81,29 @@ export function useWindowManager(initialAppId = "about") {
     (id: string) => {
       const app = APPS[id]
       if (!app) return
-      if (openIds.includes(id)) {
-        focusWindow(id)
-        return
-      }
-      const render =
-        id === "projects"
-          ? () => ProjectsWindow({ onOpenProject: openProject })
-          : () => {
-              const C = app.Content
-              return <C />
-            }
-      spawn(
-        { id, title: app.title, icon: app.icon, width: app.width, render: () => null },
-        render,
-      )
+      const content =
+        id === "projects" ? <ProjectsWindow onOpenProject={openProject} /> : <app.Content />
+      openWindow({
+        id,
+        title: app.title,
+        icon: <app.Icon size={15} />,
+        width: app.width,
+        content,
+      })
     },
-    [openIds, focusWindow, spawn, openProject],
+    [openWindow, openProject],
   )
 
-  // Ensure the initial window exists exactly once.
-  const [booted, setBooted] = useState(false)
-  if (!booted) {
-    setBooted(true)
+  useEffect(() => {
     openApp(initialAppId)
-  }
-
-  const windows = openIds.map((id) => instances[id]).filter(Boolean) as WindowInstance[]
+  }, [openApp, initialAppId])
 
   return {
-    windows,
-    openIds,
-    positions,
-    zOrder,
-    current,
+    windows: state.windows,
+    openIds: state.windows.map((w) => w.id),
+    positions: state.positions,
+    zOrder: state.zOrder,
+    current: state.zOrder[state.zOrder.length - 1] ?? null,
     openApp,
     closeWindow,
     focusWindow,

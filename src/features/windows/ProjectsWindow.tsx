@@ -7,7 +7,7 @@ interface ProjectsWindowProps {
 
 export function ProjectsWindow({ onOpenProject }: ProjectsWindowProps) {
   return (
-    <div className="max-h-[420px] w-[392px] overflow-y-auto font-body">
+    <div className="max-h-[420px] w-full overflow-y-auto font-body">
       {sortedProjects.map((project, i) => (
         <div key={project.id}>
           <button

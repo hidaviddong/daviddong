@@ -8,7 +8,7 @@ const RESUME_URL = `${ASSETS_BASE}/resume.pdf`
 
 export function ResumeWindow() {
   return (
-    <div className="flex w-[440px] flex-col gap-2.5">
+    <div className="flex w-full flex-col gap-2.5">
       <div className="flex items-center gap-2">
         <span className="font-body text-body-sm text-secondary-ink">Resume — David Dong</span>
         <a href={RESUME_URL} download className="ml-auto">

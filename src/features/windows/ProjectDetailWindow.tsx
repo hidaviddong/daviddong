@@ -7,7 +7,7 @@ interface ProjectDetailWindowProps {
 
 export function ProjectDetailWindow({ project }: ProjectDetailWindowProps) {
   return (
-    <div className="max-h-[460px] w-[420px] overflow-y-auto font-body text-body-md text-primary-ink">
+    <div className="max-h-[460px] w-full overflow-y-auto font-body text-body-md text-primary-ink">
       <div className="mb-1.5 flex items-center gap-2">
         <span className="font-chrome text-chrome-lg">{project.title}</span>
         <Badge tone={project.type === "个人" ? "primary" : "success"}>{project.type}</Badge>

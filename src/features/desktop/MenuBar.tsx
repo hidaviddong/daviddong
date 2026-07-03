@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react"
 
-interface MenuBarProps {
-  onShuffleWallpaper?: () => void
-}
-
-export function MenuBar({ onShuffleWallpaper }: MenuBarProps) {
+export function MenuBar() {
   const [time, setTime] = useState(new Date())
 
   useEffect(() => {
@@ -24,13 +20,6 @@ export function MenuBar({ onShuffleWallpaper }: MenuBarProps) {
         </span>
       ))}
       <span className="flex-1" />
-      <button
-        onClick={onShuffleWallpaper}
-        className="cursor-pointer rounded px-1.5 text-secondary-ink transition-colors hover:bg-black/5 hover:text-primary-ink"
-        title="换一张壁纸"
-      >
-        🖼️ 换壁纸
-      </button>
       <span className="text-secondary-ink">
         {time.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" })}
       </span>

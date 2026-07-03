@@ -5,22 +5,31 @@ import { ContactWindow } from "@/features/windows/ContactWindow"
 import { ResumeWindow } from "@/features/windows/ResumeWindow"
 import { TerminalWindow } from "@/features/windows/TerminalWindow"
 import { SnippetsWindow } from "@/features/windows/SnippetsWindow"
+import {
+  DocumentIcon,
+  FolderIcon,
+  MovieIcon,
+  MailIcon,
+  PdfIcon,
+  TerminalIcon,
+  type IconProps,
+} from "./icons"
 
 // A single app / window definition shown on the desktop and dock.
 export interface AppDef {
   id: string
   title: string
-  icon: string
+  Icon: ComponentType<IconProps>
   label: string
   width: number
-  Content: ComponentType<any>
+  Content: ComponentType
 }
 
 export const APPS: Record<string, AppDef> = {
   about: {
     id: "about",
     title: "About Me.txt",
-    icon: "📄",
+    Icon: DocumentIcon,
     label: "About Me",
     width: 380,
     Content: AboutWindow,
@@ -28,7 +37,7 @@ export const APPS: Record<string, AppDef> = {
   projects: {
     id: "projects",
     title: "Projects",
-    icon: "📁",
+    Icon: FolderIcon,
     label: "Projects",
     width: 420,
     Content: ProjectsWindow,
@@ -36,7 +45,7 @@ export const APPS: Record<string, AppDef> = {
   snippets: {
     id: "snippets",
     title: "Snippets.app",
-    icon: "🎬",
+    Icon: MovieIcon,
     label: "Snippets",
     width: 390,
     Content: SnippetsWindow,
@@ -44,7 +53,7 @@ export const APPS: Record<string, AppDef> = {
   contact: {
     id: "contact",
     title: "Contact.txt",
-    icon: "✉️",
+    Icon: MailIcon,
     label: "Contact",
     width: 340,
     Content: ContactWindow,
@@ -52,7 +61,7 @@ export const APPS: Record<string, AppDef> = {
   resume: {
     id: "resume",
     title: "Resume.pdf",
-    icon: "📋",
+    Icon: PdfIcon,
     label: "Resume",
     width: 470,
     Content: ResumeWindow,
@@ -60,7 +69,7 @@ export const APPS: Record<string, AppDef> = {
   terminal: {
     id: "terminal",
     title: "Terminal — zsh",
-    icon: "⌨️",
+    Icon: TerminalIcon,
     label: "Terminal",
     width: 384,
     Content: TerminalWindow,

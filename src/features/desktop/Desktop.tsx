@@ -18,7 +18,7 @@ export function Desktop() {
     moveWindow,
   } = useWindowManager("about")
 
-  const { url, loaded, shuffle } = useWallpaper()
+  const { url, loaded } = useWallpaper()
 
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[var(--surface-desktop)] font-chrome">
@@ -47,7 +47,7 @@ export function Desktop() {
         />
       ))}
 
-      <MenuBar onShuffleWallpaper={shuffle} />
+      <MenuBar />
       <Dock openIds={openIds} onOpen={openApp} />
     </div>
   )

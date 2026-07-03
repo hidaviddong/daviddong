@@ -3,7 +3,7 @@ import { profile } from "@/data/profile"
 
 export function AboutWindow() {
   return (
-    <div className="flex w-[340px] flex-col gap-2.5 font-body text-body-md text-primary-ink">
+    <div className="flex w-full flex-col gap-2.5 font-body text-body-md text-primary-ink">
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-aqua-md bg-gray-200t font-chrome text-[22px] shadow-[var(--bevel-raised)]">
           D
