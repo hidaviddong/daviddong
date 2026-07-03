@@ -46,31 +46,31 @@ bun run cf-typegen # regenerate worker-configuration.d.ts after editing bindings
 Deployed as a **Cloudflare Worker** (name `daviddong`). The custom domain
 `daviddong.me` is bound to the Worker via a route in `wrangler.jsonc`.
 
-### 🚀 To ship (this is the one command you need)
+### 🚀 Shipping — push to `master`
 
-```bash
-bun run deploy     # = vite build && wrangler deploy
-```
+Git auto-deploy is enabled via **Cloudflare Workers Builds**. Pushing to
+`master` builds and deploys to `daviddong.me` automatically.
 
-Run this whenever you want to push changes live. It builds the frontend +
-Worker and deploys to `daviddong.me`.
+Cloudflare build settings (dashboard → `daviddong` Worker → Settings → Builds):
 
-> **Deployment is manual.** Pushing to `master` does **not** auto-deploy —
-> the Worker is not connected to Git. Nothing goes live until you run
-> `bun run deploy`.
+- Production branch: `master`
+- Build command:   `bun run build`
+- Deploy command:  `npx wrangler deploy`
+- Version command: `npx wrangler versions upload` (non-production branches
+  upload a preview version without going live)
 
-`vite build` (via `@cloudflare/vite-plugin`) outputs:
+`bun run build` (via `@cloudflare/vite-plugin`) outputs:
 
 - `dist/client/`   — the static SPA (bound to the Worker as `ASSETS`)
 - `dist/daviddong/` — the bundled Worker + generated `wrangler.json`
 
-### Optional: enable Git auto-deploy
+### Manual deploy (fallback)
 
-If you later want “push to `master` → auto-deploy”, connect the repo in the
-Cloudflare dashboard under **Workers & Pages → `daviddong` → Settings →
-Builds**, with build command `npm run build` and deploy command
-`npx wrangler deploy`. The committed `wrangler.jsonc` already has everything
-Cloudflare needs (assets, routes, bindings).
+You can still deploy directly from your machine at any time:
+
+```bash
+bun run deploy     # = vite build && wrangler deploy
+```
 
 ## Images (Cloudflare R2)
 
