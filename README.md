@@ -7,7 +7,8 @@ Lives at **https://daviddong.me**.
 
 - React 19 + TypeScript + Vite
 - Tailwind CSS v4 (macOS/Aqua design tokens mapped into `@theme`)
-- Deployed on **Cloudflare Pages** (auto-deploy from the `master` branch)
+- Backend: **Cloudflare Worker** (Hono) serving both the static SPA and
+  `/api/*` routes, via `@cloudflare/vite-plugin`
 - Project images served from **Cloudflare R2** at `https://assets.daviddong.me`
 
 ## Project layout
@@ -18,37 +19,47 @@ src/
 ├── features/
 │   ├── desktop/     # desktop shell: MenuBar, Dock, icons, window manager, wallpaper
 │   └── windows/     # window content components (About, Projects, Resume, ...)
-└── components/macos # macOS UI component library
+├── components/macos # macOS UI component library
+└── worker/          # Cloudflare Worker (Hono): serves SPA + /api/* routes
 ```
 
 ## Local development
 
 ```bash
 bun install
-bun dev            # start dev server
-bun run build      # production build -> ./dist  (vite build, no type-check)
-bun run typecheck  # optional: full tsc -b type-check
+bun dev            # vite dev — runs the Worker + React together (HMR),
+                   # with local access to bindings (R2/D1/KV)
+bun run build      # production build (vite build, no type-check)
+bun run typecheck  # optional: full tsc -b type-check (app + node + worker)
+bun run cf-typegen # regenerate worker-configuration.d.ts after editing bindings
 ```
 
 > `build` intentionally runs only `vite build` (esbuild transpile, no type
 > checking) so the deploy is not blocked by unused shadcn `components/ui/`
 > files that pull in optional deps. Run `bun run typecheck` for types.
+>
+> The `/api/*` routes are handled in `src/worker/index.ts` (Hono). Everything
+> else falls through to the static SPA via the `ASSETS` binding.
 
 ## Deployment
 
-Cloudflare Pages (project name `daviddong`) auto-builds on push to `master`:
+Deployed as a **Cloudflare Worker** (name `daviddong`). The custom domain
+`daviddong.me` is bound to the Worker via a route in `wrangler.jsonc`.
 
-- Build command: `npm run build` (or `bun run build`)
-- Output dir: `./dist` (declared in `wrangler.jsonc`)
-
-Custom domain `daviddong.me` is attached to this Pages project.
-
-To deploy manually without Git:
+Deploy manually:
 
 ```bash
-bun run build
-bunx wrangler pages deploy dist --project-name daviddong --branch master
+bun run deploy     # = vite build && wrangler deploy
 ```
+
+`vite build` (via `@cloudflare/vite-plugin`) outputs:
+
+- `dist/client/`   — the static SPA (bound to the Worker as `ASSETS`)
+- `dist/daviddong/` — the bundled Worker + generated `wrangler.json`
+
+For Git-based auto-deploy, connect the repo under **Workers & Pages → the
+`daviddong` Worker → Builds**, with build command `npm run build` and deploy
+command `npx wrangler deploy`.
 
 ## Images (Cloudflare R2)
 

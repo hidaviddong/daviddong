@@ -1,6 +1,10 @@
 import { Button } from "@/components/macos"
 
-const RESUME_URL = "/resume.pdf"
+const ASSETS_BASE =
+  (import.meta.env.VITE_ASSETS_BASE as string | undefined)?.replace(/\/$/, "") ??
+  "https://assets.daviddong.me"
+
+const RESUME_URL = `${ASSETS_BASE}/resume.pdf`
 
 export function ResumeWindow() {
   return (
