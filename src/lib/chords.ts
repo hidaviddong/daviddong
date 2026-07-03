@@ -82,3 +82,56 @@ export async function findChord(input: string): Promise<ChordMatch | null> {
     chord.suffix === "major" ? chord.key : chord.suffix === "minor" ? `${chord.key}m` : chord.key + chord.suffix
   return { name: display, positions: chord.positions }
 }
+
+// ---- Reverse lookup: pressed notes → chord name ----
+
+const PC_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+
+// Pitch-class formulas above the root. Ordered most-specific first so when
+// several roots fit (C6 vs Am7), richer/lower-scored names rank by this order.
+// The trailing 3-note entries are common "shell" voicings with the 5th omitted.
+const FORMULAS: Array<[string, number[]]> = [
+  ["maj9", [0, 2, 4, 7, 11]],
+  ["9", [0, 2, 4, 7, 10]],
+  ["m9", [0, 2, 3, 7, 10]],
+  ["maj7", [0, 4, 7, 11]],
+  ["7", [0, 4, 7, 10]],
+  ["m7", [0, 3, 7, 10]],
+  ["mmaj7", [0, 3, 7, 11]],
+  ["dim7", [0, 3, 6, 9]],
+  ["m7b5", [0, 3, 6, 10]],
+  ["6", [0, 4, 7, 9]],
+  ["m6", [0, 3, 7, 9]],
+  ["add9", [0, 2, 4, 7]],
+  ["madd9", [0, 2, 3, 7]],
+  ["7sus4", [0, 5, 7, 10]],
+  ["", [0, 4, 7]],
+  ["m", [0, 3, 7]],
+  ["dim", [0, 3, 6]],
+  ["aug", [0, 4, 8]],
+  ["sus2", [0, 2, 7]],
+  ["sus4", [0, 5, 7]],
+  ["maj7", [0, 4, 11]],
+  ["7", [0, 4, 10]],
+  ["m7", [0, 3, 10]],
+  ["5", [0, 7]],
+]
+
+// Name every chord the pressed notes spell exactly, best guess first
+// (roots in the bass beat slash-chord readings).
+export function identifyChord(midi: number[]): string[] {
+  if (midi.length < 2) return []
+  const bass = Math.min(...midi) % 12
+  const pcs = [...new Set(midi.map((m) => m % 12))]
+
+  const out: Array<{ name: string; score: number }> = []
+  for (const root of pcs) {
+    const rel = new Set(pcs.map((p) => (p - root + 12) % 12))
+    const fi = FORMULAS.findIndex(([, f]) => f.length === rel.size && f.every((x) => rel.has(x)))
+    if (fi === -1) continue
+    const name = PC_NAMES[root] + FORMULAS[fi][0] + (root === bass ? "" : `/${PC_NAMES[bass]}`)
+    out.push({ name, score: (root === bass ? 0 : 100) + fi })
+  }
+  out.sort((a, b) => a.score - b.score)
+  return [...new Set(out.map((o) => o.name))]
+}
