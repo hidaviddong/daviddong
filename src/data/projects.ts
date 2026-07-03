@@ -1,61 +1,74 @@
 // ============================================================
 // Project data — migrated from the old Astro markdown collection.
-// Images are imported so Vite handles hashing / optimization.
+// Images live on Cloudflare R2 (assets.daviddong.me) instead of
+// being bundled, keeping the site build small.
 // ============================================================
 
+// Base URL of the R2 bucket custom domain (override via VITE_ASSETS_BASE).
+const ASSETS_BASE =
+  (import.meta.env.VITE_ASSETS_BASE as string | undefined)?.replace(/\/$/, "") ??
+  "https://assets.daviddong.me"
+
+// Build a full asset URL from a key under the bucket (e.g. "projects/tme/game.gif").
+// Path segments are encoded so folders like "98.ui" / "dApp" work correctly.
+function asset(key: string): string {
+  const encoded = key.split("/").map(encodeURIComponent).join("/")
+  return `${ASSETS_BASE}/${encoded}`
+}
+
 // 98.ui
-import ui98Cover from "@/assets/projects/98.ui/98.ui.png"
+const ui98Cover = asset("projects/98.ui/98.ui.png")
 
 // autopdf
-import autopdfResume from "@/assets/projects/autopdf/resume.png"
-import autopdfCoverletter from "@/assets/projects/autopdf/coverletter.gif"
-import autopdfReport from "@/assets/projects/autopdf/report.png"
+const autopdfResume = asset("projects/autopdf/resume.png")
+const autopdfCoverletter = asset("projects/autopdf/coverletter.gif")
+const autopdfReport = asset("projects/autopdf/report.png")
 
 // chatbot
-import chatbotMain from "@/assets/projects/chatbot/main.webp"
-import chatbotDialog from "@/assets/projects/chatbot/dialog.webp"
-import chatbotImage from "@/assets/projects/chatbot/image.webp"
-import chatbotLiterature from "@/assets/projects/chatbot/literature.webp"
+const chatbotMain = asset("projects/chatbot/main.webp")
+const chatbotDialog = asset("projects/chatbot/dialog.webp")
+const chatbotImage = asset("projects/chatbot/image.webp")
+const chatbotLiterature = asset("projects/chatbot/literature.webp")
 
 // comments
-import commentsGif from "@/assets/projects/comments/comments.gif"
+const commentsGif = asset("projects/comments/comments.gif")
 
 // dApp
-import dappSwap from "@/assets/projects/dApp/swap.png"
-import dappStake from "@/assets/projects/dApp/stake.png"
-import dappClaim from "@/assets/projects/dApp/claim.png"
+const dappSwap = asset("projects/dApp/swap.png")
+const dappStake = asset("projects/dApp/stake.png")
+const dappClaim = asset("projects/dApp/claim.png")
 
 // data-visualization
-import dvModel from "@/assets/projects/data-visualization/model.webp"
-import dvBaked from "@/assets/projects/data-visualization/baked.webp"
-import dvTexture from "@/assets/projects/data-visualization/texture.webp"
-import dvMap from "@/assets/projects/data-visualization/map.gif"
-import dvEeg from "@/assets/projects/data-visualization/eeg.gif"
+const dvModel = asset("projects/data-visualization/model.webp")
+const dvBaked = asset("projects/data-visualization/baked.webp")
+const dvTexture = asset("projects/data-visualization/texture.webp")
+const dvMap = asset("projects/data-visualization/map.gif")
+const dvEeg = asset("projects/data-visualization/eeg.gif")
 
 // lyrics
-import lyricsPortrait from "@/assets/projects/lyrics/lyrics-portrait.webp"
-import lyricsLandscape from "@/assets/projects/lyrics/lyrics-landscape.webp"
+const lyricsPortrait = asset("projects/lyrics/lyrics-portrait.webp")
+const lyricsLandscape = asset("projects/lyrics/lyrics-landscape.webp")
 
 // next-media
-import nmPoster from "@/assets/projects/next-media/poster.png"
-import nmDetail from "@/assets/projects/next-media/detail.png"
-import nmSubtitle from "@/assets/projects/next-media/subtitle.png"
-import nmDirectPlay from "@/assets/projects/next-media/direct-play.png"
-import nmRemux from "@/assets/projects/next-media/remux.png"
-import nmHls from "@/assets/projects/next-media/hls.png"
+const nmPoster = asset("projects/next-media/poster.png")
+const nmDetail = asset("projects/next-media/detail.png")
+const nmSubtitle = asset("projects/next-media/subtitle.png")
+const nmDirectPlay = asset("projects/next-media/direct-play.png")
+const nmRemux = asset("projects/next-media/remux.png")
+const nmHls = asset("projects/next-media/hls.png")
 
 // polymarket-tg-agent
-import polymarketAgent from "@/assets/projects/polymarket-tg-agent/agent.gif"
+const polymarketAgent = asset("projects/polymarket-tg-agent/agent.gif")
 
 // qrcode
-import qrcodeDemo from "@/assets/projects/qrcode/demo.gif"
+const qrcodeDemo = asset("projects/qrcode/demo.gif")
 
 // tme
-import tmeGame from "@/assets/projects/tme/game.gif"
-import tmeRank from "@/assets/projects/tme/rank.gif"
+const tmeGame = asset("projects/tme/game.gif")
+const tmeRank = asset("projects/tme/rank.gif")
 
 // watchbus
-import watchbusGif from "@/assets/projects/watchbus/watchbus.gif"
+const watchbusGif = asset("projects/watchbus/watchbus.gif")
 
 export type ProjectType = "个人" | "工作"
 
