@@ -173,6 +173,39 @@ export function TerminalIcon({ size = 32 }: IconProps) {
   )
 }
 
+export function TunerIcon({ size = 32 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
+      <defs>
+        <linearGradient id="hddi-tuner" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffb84d" />
+          <stop offset="1" stopColor="#e07800" />
+        </linearGradient>
+        <linearGradient id="hddi-tuner-gloss" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffffff" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <rect x="3" y="5" width="26" height="22" rx="3.5" fill="url(#hddi-tuner)" stroke="#b35f00" />
+      <rect x="4" y="6" width="24" height="9" rx="2.6" fill="url(#hddi-tuner-gloss)" />
+      {/* dial */}
+      <path
+        d="M8.5 22a7.5 7.5 0 0 1 15 0"
+        fill="#fffdf5"
+        stroke="#b35f00"
+        strokeWidth="0.9"
+      />
+      <g stroke="#c9a15e" strokeWidth="0.9" strokeLinecap="round">
+        <path d="M10.6 18.6l1.5 1.1" />
+        <path d="M21.4 18.6l-1.5 1.1" />
+      </g>
+      <path d="M16 14.8v2" stroke="#2da44e" strokeWidth="1.1" strokeLinecap="round" />
+      <path d="M16 22L12.8 16.6" stroke="#d70015" strokeWidth="1.4" strokeLinecap="round" />
+      <circle cx="16" cy="22" r="1.6" fill="#48484a" />
+    </svg>
+  )
+}
+
 export function TrashIcon({ size = 32 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
