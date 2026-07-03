@@ -1,5 +1,33 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "daviddong",
+  "main": "src/worker/index.ts",
   "compatibility_date": "2025-12-08",
-  "pages_build_output_dir": "./dist"
+  "routes": [
+    { "pattern": "daviddong.me", "custom_domain": true }
+  ],
+  "preview_urls": true,
+  "workers_dev": true,
+  "assets": {
+    // Built frontend (vite build output).
+    "directory": "./dist/client",
+    // Exposes static assets to the Worker as env.ASSETS.
+    "binding": "ASSETS",
+    // Serve index.html for unknown client-side routes (SPA).
+    "not_found_handling": "single-page-application",
+    // Serve static files (HTML/JS/CSS/images) straight from the CDN without
+    // invoking the Worker — those hits do NOT count against the Worker
+    // request quota. The Worker only runs for non-asset paths (/api/*).
+    "run_worker_first": false
+  },
+  "observability": {
+    "enabled": true
+  }
+  // Future backend bindings go here, e.g.:
+  // "r2_buckets": [
+  //   { "binding": "ASSETS_BUCKET", "bucket_name": "daviddong-assets" }
+  // ],
+  // "d1_databases": [
+  //   { "binding": "DB", "database_name": "daviddong", "database_id": "..." }
+  // ]
 }
