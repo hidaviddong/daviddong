@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { Suspense, useRef, useState } from "react"
 import type { ReactNode } from "react"
 import { motion } from "motion/react"
 import { WindowFrame } from "@/components/macos"
@@ -224,7 +224,17 @@ export function DraggableWindow({
             style: { cursor: "move", touchAction: "none", userSelect: "none" },
           }}
         >
-          {win.content}
+          {/* Lazy-loaded windows (Tuner, Chords) suspend while their chunk
+              downloads; everything else renders through this untouched. */}
+          <Suspense
+            fallback={
+              <div className="flex min-h-24 items-center justify-center text-body-sm text-secondary-ink">
+                载入中…
+              </div>
+            }
+          >
+            {win.content}
+          </Suspense>
         </WindowFrame>
         <ResizeGrip
           onPointerDown={onGripPointerDown}

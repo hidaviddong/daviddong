@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { PitchDetector } from "pitchy"
 import { Button, Select, Separator } from "@/components/macos"
 import { NOTE_NAMES, midiToFreq, midiToName, playPluck } from "@/lib/music"
 
@@ -16,55 +17,12 @@ const TUNINGS = [
 const CUSTOM_OPTION = { value: "custom", label: "Custom（自定义）" }
 const IN_TUNE_CENTS = 5
 
-// ---- Pitch detection (autocorrelation) ----
-
-// Max lag of 1000 samples ≈ 48 Hz floor at a 48 kHz sample rate — low enough
-// for drop tunings, small enough to keep the per-frame O(lag·window) cost cheap.
-const MAX_LAG = 1000
-
-function detectPitch(buf: Float32Array, sampleRate: number): number | null {
-  const window = buf.length - MAX_LAG
-
-  let rms = 0
-  for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i]
-  rms = Math.sqrt(rms / buf.length)
-  if (rms < 0.01) return null
-
-  let e0 = 0
-  for (let i = 0; i < window; i++) e0 += buf[i] * buf[i]
-
-  const c = new Float32Array(MAX_LAG)
-  for (let lag = 1; lag < MAX_LAG; lag++) {
-    let sum = 0
-    for (let i = 0; i < window; i++) sum += buf[i] * buf[i + lag]
-    c[lag] = sum
-  }
-
-  // Walk past the zero-lag peak, then take the strongest correlation peak.
-  let d = 1
-  while (d < MAX_LAG - 1 && c[d] > c[d + 1]) d++
-  let maxval = -1
-  let maxpos = -1
-  for (let i = d; i < MAX_LAG - 1; i++) {
-    if (c[i] > maxval) {
-      maxval = c[i]
-      maxpos = i
-    }
-  }
-  // Reject noise: a real pitch correlates strongly with itself one period later.
-  if (maxpos <= 0 || maxval < 0.3 * e0) return null
-
-  // Parabolic interpolation for sub-sample lag accuracy (a few cents).
-  const x1 = c[maxpos - 1]
-  const x2 = c[maxpos]
-  const x3 = c[maxpos + 1]
-  const a = (x1 + x3 - 2 * x2) / 2
-  const b = (x3 - x1) / 2
-  const lag = a ? maxpos - b / (2 * a) : maxpos
-
-  const freq = sampleRate / lag
-  return freq >= 50 && freq <= 900 ? freq : null
-}
+// Pitch detection is handled by `pitchy` (McLeod Pitch Method).
+// 4096 samples ≈ 85 ms at 48 kHz — enough to resolve a low drop-D (~73 Hz).
+const FFT_SIZE = 4096
+const MIN_CLARITY = 0.9
+const MIN_FREQ = 50
+const MAX_FREQ = 900
 
 // Streams mic audio and reports a smoothed pitch. Holds the last reading for a
 // short grace period so the needle doesn't flicker between plucks.
@@ -98,13 +56,16 @@ function useMicPitch(running: boolean) {
         stream = s
         ctx = new AudioContext()
         const analyser = ctx.createAnalyser()
-        analyser.fftSize = 2048
+        analyser.fftSize = FFT_SIZE
         ctx.createMediaStreamSource(s).connect(analyser)
         const data = new Float32Array(analyser.fftSize)
+        const detector = PitchDetector.forFloat32Array(analyser.fftSize)
+        detector.minVolumeDecibels = -40
 
         const tick = () => {
           analyser.getFloatTimeDomainData(data)
-          const f = detectPitch(data, ctx!.sampleRate)
+          const [pitch, clarity] = detector.findPitch(data, ctx!.sampleRate)
+          const f = clarity >= MIN_CLARITY && pitch >= MIN_FREQ && pitch <= MAX_FREQ ? pitch : null
           const now = performance.now()
           if (f) {
             // Reset smoothing on a jump to a different note (> ~1 semitone).

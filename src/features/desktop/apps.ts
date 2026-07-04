@@ -1,11 +1,20 @@
-import type { ComponentType, CSSProperties } from "react"
+import { lazy, type ComponentType, type CSSProperties } from "react"
 import { ProjectsWindow } from "@/features/windows/ProjectsWindow"
 import { ContactWindow } from "@/features/windows/ContactWindow"
 import { ResumeWindow } from "@/features/windows/ResumeWindow"
 import { TerminalWindow } from "@/features/windows/TerminalWindow"
 import { SnippetsWindow } from "@/features/windows/SnippetsWindow"
-import { TunerWindow } from "@/features/windows/TunerWindow"
-import { ChordsWindow } from "@/features/windows/ChordsWindow"
+
+// Tuner and Chords pull in heavy deps (Tone.js, pitchy, chords-db), so they
+// are code-split: `import()` makes Vite emit a separate chunk per window,
+// fetched only when the app is first opened. `lazy()` expects a default
+// export, hence the `.then()` mapping for named exports.
+const TunerWindow = lazy(() =>
+  import("@/features/windows/TunerWindow").then((m) => ({ default: m.TunerWindow })),
+)
+const ChordsWindow = lazy(() =>
+  import("@/features/windows/ChordsWindow").then((m) => ({ default: m.ChordsWindow })),
+)
 import {
   DocumentIcon,
   FolderIcon,
