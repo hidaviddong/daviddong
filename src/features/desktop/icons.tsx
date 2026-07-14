@@ -234,6 +234,34 @@ export function ChordIcon({ size = 32 }: IconProps) {
   )
 }
 
+export function CityIcon({ size = 32 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
+      <defs>
+        <linearGradient id="hddi-city" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#6dd5ed" />
+          <stop offset="1" stopColor="#1878b0" />
+        </linearGradient>
+        <linearGradient id="hddi-city-gloss" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffffff" stopOpacity="0.5" />
+          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <rect x="3" y="5" width="26" height="22" rx="3.5" fill="url(#hddi-city)" stroke="#0e5c86" />
+      <rect x="4" y="6" width="24" height="9" rx="2.6" fill="url(#hddi-city-gloss)" />
+      {/* skyline silhouette */}
+      <g fill="#ffffff" opacity="0.95">
+        <rect x="7" y="16" width="4" height="9" rx="0.5" />
+        <rect x="12" y="11" width="5" height="14" rx="0.5" />
+        <rect x="18" y="14" width="4" height="11" rx="0.5" />
+        <rect x="23" y="17" width="3.5" height="8" rx="0.5" />
+      </g>
+      {/* orbit ring, signals "3D" */}
+      <ellipse cx="14.5" cy="18" rx="8.5" ry="3.4" fill="none" stroke="#ffffff" strokeOpacity="0.85" strokeWidth="1" />
+    </svg>
+  )
+}
+
 export function TrashIcon({ size = 32 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">

@@ -32,6 +32,7 @@ function seed(): FsDir {
       "Chords.app": f("Mach-O executable ppc", "chords"),
       "Snippets.app": f("Mach-O executable ppc", "snippets"),
       "Terminal.app": f("Mach-O executable ppc", "terminal"),
+      "CausewayBay.app": f("Mach-O executable ppc", "cityviewer"),
     }),
     Users: d({
       david: d({

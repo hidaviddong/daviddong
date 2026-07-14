@@ -15,8 +15,11 @@ const TunerWindow = lazy(() =>
 const ChordsWindow = lazy(() =>
   import("@/features/windows/ChordsWindow").then((m) => ({ default: m.ChordsWindow })),
 )
+// Three.js pulls in its own sizable chunk, so it's code-split like Tone.js above.
+const CityViewerWindow = lazy(() =>
+  import("@/features/windows/CityViewerWindow").then((m) => ({ default: m.CityViewerWindow })),
+)
 import {
-  DocumentIcon,
   FolderIcon,
   MovieIcon,
   MailIcon,
@@ -24,6 +27,7 @@ import {
   TerminalIcon,
   TunerIcon,
   ChordIcon,
+  CityIcon,
   type IconProps,
 } from "./icons"
 
@@ -100,6 +104,16 @@ export const APPS: Record<string, AppDef> = {
     width: 480,
     Content: ChordsWindow,
   },
+  cityviewer: {
+    id: "cityviewer",
+    title: "CausewayBay.app",
+    Icon: CityIcon,
+    label: "CausewayBay",
+    width: 560,
+    height: 420,
+    contentStyle: { padding: 0, overflow: "hidden" },
+    Content: CityViewerWindow,
+  },
 }
 
 // Order used for the desktop icons and dock.
@@ -111,4 +125,5 @@ export const APP_ORDER = [
   "terminal",
   "tuner",
   "chords",
+  "cityviewer",
 ]

@@ -16,6 +16,16 @@ dist-ssr
 .wrangler
 .dev.vars
 
+# Raw 3D source assets (large photogrammetry downloads) live outside public/
+# so Vite never copies them into dist — only processed output ships.
+raw-assets/
+# Converted photogrammetry tiles (~4MB each × 20). Kept out of git while
+# deciding between R2 hosting (like project images) and committing.
+public/models/hk-tiles/
+# Work-in-progress real-mesh export; still iterating on size before this
+# goes to R2 (like project images) or gets committed.
+public/models/causeway-bay-real.glb
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

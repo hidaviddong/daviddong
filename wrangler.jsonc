@@ -26,11 +26,16 @@
   "kv_namespaces": [
     // Saved chord sheets for Chords.app (see src/worker/index.ts /api/sheets).
     { "binding": "CHORD_SHEETS", "id": "86bd89398e6a4b4784a8b2d3c6c40d03" }
+  ],
+  "r2_buckets": [
+    // HK photogrammetry tiles for CausewayBay.app (~90MB of GLBs, key prefix
+    // hk-tiles/). Uploaded by scripts/hk-tiles/upload-r2.sh and served by the
+    // /models/hk-tiles/* route in src/worker/index.ts — the folder is
+    // gitignored, so production asset builds don't contain it and requests
+    // fall through to the Worker.
+    { "binding": "MODELS", "bucket_name": "daviddong-assets" }
   ]
   // Future backend bindings go here, e.g.:
-  // "r2_buckets": [
-  //   { "binding": "ASSETS_BUCKET", "bucket_name": "daviddong-assets" }
-  // ],
   // "d1_databases": [
   //   { "binding": "DB", "database_name": "daviddong", "database_id": "..." }
   // ]
