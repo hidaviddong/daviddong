@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Separator, Spinner } from "@/components/macos"
-import { formatDiaryDate } from "./diary-date"
+import { diaryHeaders, formatDiaryDate } from "./diary-date"
 import "./diary-markdown.css"
 
 interface DiaryEntryWindowProps {
@@ -12,17 +12,21 @@ interface DiaryEntryWindowProps {
 // first time an entry is opened (same motivation as the lazy apps).
 export function DiaryEntryWindow({ date }: DiaryEntryWindowProps) {
   const [html, setHtml] = useState<string | null>(null)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState<"load" | "auth" | null>(null)
 
   useEffect(() => {
     let cancelled = false
-    Promise.all([fetch(`/api/diary/${date}`), import("marked")])
+    Promise.all([fetch(`/api/diary/${date}`, { headers: diaryHeaders() }), import("marked")])
       .then(async ([res, { marked }]) => {
+        if (res.status === 401) {
+          if (!cancelled) setError("auth")
+          return
+        }
         if (!res.ok) throw new Error(`http ${res.status}`)
         const md = await res.text()
         if (!cancelled) setHtml(marked.parse(md, { async: false, gfm: true, breaks: true }))
       })
-      .catch(() => !cancelled && setError(true))
+      .catch(() => !cancelled && setError("load"))
     return () => {
       cancelled = true
     }
@@ -38,7 +42,7 @@ export function DiaryEntryWindow({ date }: DiaryEntryWindowProps) {
 
       {error && (
         <p className="m-0 py-6 text-center text-body-sm text-secondary-ink">
-          这篇日记加载失败。
+          {error === "auth" ? "密码已失效，请回到 AI Diary 窗口重新解锁。" : "这篇日记加载失败。"}
         </p>
       )}
       {!error && html === null && (

@@ -6,6 +6,23 @@ export interface DiaryEntry {
   size: number
 }
 
+// The unlock password, kept in localStorage so it survives reloads; a stale
+// value just 401s and brings the prompt back. Sent as a Bearer token to the
+// /api/diary routes (checked against the DIARY_PASSWORD secret).
+const PASSWORD_KEY = "diary:password"
+
+export function getDiaryPassword() {
+  return localStorage.getItem(PASSWORD_KEY) ?? ""
+}
+
+export function setDiaryPassword(pw: string) {
+  localStorage.setItem(PASSWORD_KEY, pw)
+}
+
+export function diaryHeaders(pw = getDiaryPassword()): HeadersInit {
+  return pw ? { Authorization: `Bearer ${pw}` } : {}
+}
+
 const WEEKDAYS = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
 
 // "2026-01-01" → "2026年1月1日 · 周四". Parsed as local midnight so the
