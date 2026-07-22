@@ -262,6 +262,49 @@ export function CityIcon({ size = 32 }: IconProps) {
   )
 }
 
+export function DiaryIcon({ size = 32 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
+      <defs>
+        <linearGradient id="hddi-diary-cover" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f79ad3" />
+          <stop offset="1" stopColor="#c2379b" />
+        </linearGradient>
+        <linearGradient id="hddi-diary-gloss" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffffff" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      {/* page edge peeking out under the cover */}
+      <rect x="6.5" y="4.5" width="21" height="23" rx="2.5" fill="#f4f4f8" stroke="#b4b4bc" />
+      {/* cover */}
+      <rect x="4.5" y="4" width="21.5" height="24" rx="2.5" fill="url(#hddi-diary-cover)" stroke="#96256f" />
+      <rect x="5.5" y="5" width="19.5" height="9.5" rx="2" fill="url(#hddi-diary-gloss)" />
+      {/* spine rings */}
+      <g fill="#96256f">
+        <circle cx="7.6" cy="9" r="1" />
+        <circle cx="7.6" cy="14" r="1" />
+        <circle cx="7.6" cy="19" r="1" />
+        <circle cx="7.6" cy="24" r="1" />
+      </g>
+      {/* ruled lines */}
+      <g stroke="#ffffff" strokeOpacity="0.85" strokeWidth="1.4" strokeLinecap="round">
+        <path d="M11.5 13h11" />
+        <path d="M11.5 17.5h11" />
+        <path d="M11.5 22h7" />
+      </g>
+      {/* AI sparkle */}
+      <path
+        d="M24.5 20.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"
+        fill="#fff2a8"
+        stroke="#e0a800"
+        strokeWidth="0.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export function TrashIcon({ size = 32 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">

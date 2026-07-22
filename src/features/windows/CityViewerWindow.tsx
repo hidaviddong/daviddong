@@ -24,13 +24,89 @@ const BOUND_KEYS = new Set([
 
 const TILE_BASE_URL = "/models/hk-tiles/"
 const DRACO_DECODER_PATH = "/draco/"
+const KTX2_TRANSCODER_PATH = "/basis/"
 const TAXI_URL = "/models/hk-taxi.glb"
 
 // Daytime aerial-survey textures — a hazy Hong Kong noon. Fog doubles as the
 // tile-streaming curtain: unloaded tiles sit past the fully fogged distance.
-const SKY_COLOR = 0xc3d1dc
+const HORIZON_COLOR = 0xc3d1dc
+const ZENITH_COLOR = 0x87a5c4
 const FOG_NEAR = 130
 const FOG_FAR = 380
+
+// Gradient sky dome — the flat background colour reads as a void; a zenith→
+// horizon ramp sells the haze the fog implies. Rendered inside-out on a
+// sphere that follows the camera, and skips tone mapping like the tiles so
+// the horizon exactly matches the fog colour.
+function buildSkyDome(): THREE.Mesh {
+  const geo = new THREE.SphereGeometry(900, 24, 12)
+  const mat = new THREE.ShaderMaterial({
+    side: THREE.BackSide,
+    depthWrite: false,
+    fog: false,
+    uniforms: {
+      zenith: { value: new THREE.Color(ZENITH_COLOR) },
+      horizon: { value: new THREE.Color(HORIZON_COLOR) },
+    },
+    vertexShader: /* glsl */ `
+      varying vec3 vDir;
+      void main() {
+        vDir = position;
+        // Pin to the camera so the dome never gets driven out of.
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        gl_Position = (projectionMatrix * mv).xyww; // depth = far plane
+      }
+    `,
+    fragmentShader: /* glsl */ `
+      uniform vec3 zenith;
+      uniform vec3 horizon;
+      varying vec3 vDir;
+      void main() {
+        float h = clamp(normalize(vDir).y, 0.0, 1.0);
+        // Haze hugs the horizon; sky clears up fast overhead.
+        vec3 col = mix(horizon, zenith, pow(h, 0.55));
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  })
+  const mesh = new THREE.Mesh(geo, mat)
+  mesh.renderOrder = -1
+  mesh.frustumCulled = false
+  return mesh
+}
+
+// Soft radial "contact shadow" blob that hugs the ground under the taxi.
+// The photogrammetry tiles are unlit (MeshBasicMaterial) so they can't
+// receive real shadow maps — this cheap decal is what keeps the car looking
+// planted instead of floating.
+function buildBlobShadow(carLength: number): THREE.Mesh {
+  const size = 128
+  const canvas = document.createElement("canvas")
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext("2d")
+  if (ctx) {
+    const g = ctx.createRadialGradient(size / 2, size / 2, size * 0.05, size / 2, size / 2, size / 2)
+    g.addColorStop(0, "rgba(0,0,0,0.42)")
+    g.addColorStop(0.55, "rgba(0,0,0,0.25)")
+    g.addColorStop(1, "rgba(0,0,0,0)")
+    ctx.fillStyle = g
+    ctx.fillRect(0, 0, size, size)
+  }
+  const tex = new THREE.CanvasTexture(canvas)
+  const geo = new THREE.PlaneGeometry(carLength * 0.62, carLength * 1.18)
+  geo.rotateX(-Math.PI / 2)
+  const mat = new THREE.MeshBasicMaterial({
+    map: tex,
+    transparent: true,
+    depthWrite: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+  })
+  const mesh = new THREE.Mesh(geo, mat)
+  mesh.renderOrder = 1
+  return mesh
+}
 
 function anyPressed(pressed: Set<string>, keys: Set<string>) {
   for (const key of pressed) if (keys.has(key)) return true
@@ -150,14 +226,22 @@ function useCityScene(mount: HTMLDivElement | null) {
     setProgress({ ready: 0, wanted: 1 })
 
     const scene = new THREE.Scene()
-    scene.background = new THREE.Color(SKY_COLOR)
-    scene.fog = new THREE.Fog(SKY_COLOR, FOG_NEAR, FOG_FAR)
+    scene.fog = new THREE.Fog(HORIZON_COLOR, FOG_NEAR, FOG_FAR)
 
     const camera = new THREE.PerspectiveCamera(55, 1, 0.5, 1200)
 
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    // Filmic response for the lit taxi (paint rolls off instead of clipping);
+    // tiles and sky opt out via toneMapped: false since they're photographs.
+    renderer.toneMapping = THREE.ACESFilmicToneMapping
+    renderer.toneMappingExposure = 1.1
+    renderer.shadowMap.enabled = true
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap
     mount.appendChild(renderer.domElement)
+
+    const sky = buildSkyDome()
+    scene.add(sky)
 
     // Tiles render unlit (photogrammetry has baked lighting); lights and the
     // studio environment below exist for the taxi alone — the env map is what
@@ -166,10 +250,23 @@ function useCityScene(mount: HTMLDivElement | null) {
     const envRT = pmrem.fromScene(new RoomEnvironment(), 0.04)
     scene.environment = envRT.texture
     pmrem.dispose()
-    scene.add(new THREE.HemisphereLight(0xe8eef4, 0x8f959b, 0.55))
-    const sun = new THREE.DirectionalLight(0xfff1dd, 0.85)
+    scene.add(new THREE.HemisphereLight(0xe8eef4, 0x8f959b, 0.7))
+    // The sun matches the survey's baked light direction (high, slightly
+    // south-west) and casts a tight shadow map that only the taxi occupies —
+    // it re-anchors the car to the photographed world every frame.
+    const sun = new THREE.DirectionalLight(0xfff1dd, 1.3)
     sun.position.set(250, 300, 150)
+    sun.castShadow = true
+    sun.shadow.mapSize.set(1024, 1024)
+    sun.shadow.camera.near = 50
+    sun.shadow.camera.far = 700
+    sun.shadow.camera.left = -8
+    sun.shadow.camera.right = 8
+    sun.shadow.camera.top = 8
+    sun.shadow.camera.bottom = -8
+    sun.shadow.bias = -0.0004
     scene.add(sun)
+    scene.add(sun.target)
 
     let frame = 0
     const resize = () => {
@@ -214,6 +311,10 @@ function useCityScene(mount: HTMLDivElement | null) {
     car.visible = false
     scene.add(car)
 
+    const blobShadow = buildBlobShadow(carLength)
+    blobShadow.visible = false
+    scene.add(blobShadow)
+
     const drive: DriveState = {
       car,
       wheels: [], // filled once the taxi GLB arrives
@@ -242,6 +343,7 @@ function useCityScene(mount: HTMLDivElement | null) {
     const alignQuat = new THREE.Quaternion()
     const targetQuat = new THREE.Quaternion()
     const camOffset = new THREE.Vector3()
+    const sunOffset = new THREE.Vector3(250, 300, 150).normalize().multiplyScalar(300)
     const desiredCamPos = new THREE.Vector3()
     const lookTarget = new THREE.Vector3()
     const camDir = new THREE.Vector3()
@@ -274,12 +376,22 @@ function useCityScene(mount: HTMLDivElement | null) {
         // If unmounted, the taxi never rendered, so it holds no GPU
         // resources — safe to just drop it for GC.
         if (cancelled) return
+        taxi.model.traverse((obj) => {
+          if (obj instanceof THREE.Mesh) {
+            // Self-shadowing (roof onto bonnet, body onto wheels) is the only
+            // real-shadow pass in the scene; the ground contact is the blob.
+            obj.castShadow = true
+            obj.receiveShadow = true
+          }
+        })
         car.add(taxi.model)
         drive.wheels = taxi.wheels
         drive.steerGroups = taxi.steerGroups
         world = new HKTileWorld(manifest, {
           baseUrl: TILE_BASE_URL,
           decoderPath: DRACO_DECODER_PATH,
+          ktx2TranscoderPath: KTX2_TRANSCODER_PATH,
+          renderer,
         })
         scene.add(world.group)
         world.update(0, 0)
@@ -387,6 +499,15 @@ function useCityScene(mount: HTMLDivElement | null) {
         for (const wheel of d.wheels) wheel.rotation.x += rollDelta
         const steerAngle = steerInput * 0.5
         for (const group of d.steerGroups) group.rotation.y = steerAngle
+
+        // Contact shadow rides the ground plane just under the car, and the
+        // sun's tight shadow frustum tracks the car so the taxi never drives
+        // out of its own shadow map.
+        blobShadow.visible = true
+        blobShadow.position.set(car.position.x, d.groundY + 0.04, car.position.z)
+        blobShadow.quaternion.copy(car.quaternion)
+        sun.target.position.copy(car.position)
+        sun.position.copy(car.position).add(sunOffset)
 
         // Chase camera with speed-based FOV and building avoidance.
         lookTarget.copy(car.position).setY(car.position.y + carLength * 0.65)

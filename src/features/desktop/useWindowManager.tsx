@@ -3,6 +3,8 @@ import { APPS } from "./apps"
 import { DocumentIcon } from "./icons"
 import { ProjectsWindow } from "@/features/windows/ProjectsWindow"
 import { ProjectDetailWindow } from "@/features/windows/ProjectDetailWindow"
+import { DiaryWindow, type DiaryEntry } from "@/features/windows/DiaryWindow"
+import { DiaryEntryWindow } from "@/features/windows/DiaryEntryWindow"
 import type { Project } from "@/data/projects"
 import type { WindowInstance } from "./DraggableWindow"
 
@@ -142,13 +144,33 @@ export function useWindowManager(initialAppId = "about") {
     [openWindow],
   )
 
+  // Open a diary entry window (one per date).
+  const openDiaryEntry = useCallback(
+    (entry: DiaryEntry) => {
+      openWindow({
+        id: `diary:${entry.date}`,
+        title: `${entry.date}.md`,
+        icon: <DocumentIcon size={15} />,
+        width: 460,
+        content: <DiaryEntryWindow date={entry.date} />,
+      })
+    },
+    [openWindow],
+  )
+
   // Open a top-level app window by id.
   const openApp = useCallback(
     (id: string) => {
       const app = APPS[id]
       if (!app) return
       const content =
-        id === "projects" ? <ProjectsWindow onOpenProject={openProject} /> : <app.Content />
+        id === "projects" ? (
+          <ProjectsWindow onOpenProject={openProject} />
+        ) : id === "diary" ? (
+          <DiaryWindow onOpenEntry={openDiaryEntry} />
+        ) : (
+          <app.Content />
+        )
       openWindow({
         id,
         title: app.title,
@@ -159,7 +181,7 @@ export function useWindowManager(initialAppId = "about") {
         content,
       })
     },
-    [openWindow, openProject],
+    [openWindow, openProject, openDiaryEntry],
   )
 
   useEffect(() => {

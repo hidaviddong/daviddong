@@ -7,7 +7,9 @@
 # The source tiles (Lands Department 3D photo-realistic model, sheet 11-SW-15B)
 # are 3ds Max OBJ exports: z-up, vertices in HK1980 grid metres minus 800000,
 # ~0.5-1M triangles and 8192px JPEG atlases per tile — ~200MB each. Output is
-# a Draco-compressed GLB with 2048px WebP textures, a few MB each.
+# a Draco-compressed GLB whose textures keep their source format (JPEG/PNG,
+# 4096px by default) — an intermediate that convert-one.sh immediately
+# recompresses to KTX2/UASTC GPU textures (toktx reads JPEG/PNG, not WebP).
 
 import bpy
 import json
@@ -79,8 +81,7 @@ def main():
     desired = dict(
         filepath=out_glb,
         export_format="GLB",
-        export_image_format="WEBP",
-        export_image_quality=80,
+        export_image_format="AUTO",  # keep JPEG/PNG; toktx can't read WebP
         export_draco_mesh_compression_enable=True,
         export_draco_mesh_compression_level=6,
         export_yup=True,

@@ -1,6 +1,7 @@
 import * as THREE from "three"
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
+import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js"
 import { acceleratedRaycast, computeBoundsTree, disposeBoundsTree } from "three-mesh-bvh"
 
 // Accelerated raycasts are what make per-frame ground/wall/camera queries
@@ -61,6 +62,8 @@ export class HKTileWorld {
   private readonly tiles: TileRuntime[]
   private readonly loader: GLTFLoader
   private readonly draco: DRACOLoader
+  private readonly ktx2: KTX2Loader
+  private readonly anisotropy: number
   private readonly baseUrl: string
   private readonly loadRadius: number
   private readonly unloadRadius: number
@@ -77,6 +80,10 @@ export class HKTileWorld {
     opts: {
       baseUrl: string
       decoderPath: string
+      /** Basis Universal transcoder path for the KTX2 GPU textures. */
+      ktx2TranscoderPath: string
+      /** Needed by KTX2Loader to pick a target GPU format (ASTC/BC7/…). */
+      renderer: THREE.WebGLRenderer
       loadRadius?: number
       unloadRadius?: number
       maxConcurrent?: number
@@ -114,8 +121,15 @@ export class HKTileWorld {
 
     this.draco = new DRACOLoader()
     this.draco.setDecoderPath(opts.decoderPath)
+    this.ktx2 = new KTX2Loader()
+    this.ktx2.setTranscoderPath(opts.ktx2TranscoderPath)
+    this.ktx2.detectSupport(opts.renderer)
+    // Sharp facades at grazing angles — street-level driving looks along
+    // walls and roads, exactly where isotropic mip filtering smears worst.
+    this.anisotropy = Math.min(8, opts.renderer.capabilities.getMaxAnisotropy())
     this.loader = new GLTFLoader()
     this.loader.setDRACOLoader(this.draco)
+    this.loader.setKTX2Loader(this.ktx2)
     this.ray.firstHitOnly = true
   }
 
@@ -218,6 +232,7 @@ export class HKTileWorld {
       t.state = "failed" // block any in-flight onLoad from re-adding
     }
     this.draco.dispose()
+    this.ktx2.dispose()
   }
 
   private static readonly DOWN = new THREE.Vector3(0, -1, 0)
@@ -243,7 +258,7 @@ export class HKTileWorld {
           obj.updateMatrix()
           obj.matrixAutoUpdate = false
           if (obj instanceof THREE.Mesh) {
-            obj.material = toUnlit(obj.material)
+            obj.material = toUnlit(obj.material, this.anisotropy)
             t.pendingMeshes.push(obj)
           }
         })
@@ -292,12 +307,15 @@ export class HKTileWorld {
 
 // Photogrammetry has lighting baked into its textures, so unlit rendering is
 // both correct and the cheapest possible material.
-function toUnlit(material: THREE.Material | THREE.Material[]): THREE.MeshBasicMaterial {
+function toUnlit(material: THREE.Material | THREE.Material[], anisotropy: number): THREE.MeshBasicMaterial {
   const src = Array.isArray(material) ? material[0] : material
   const map = src instanceof THREE.MeshStandardMaterial ? src.map : null
+  if (map) map.anisotropy = anisotropy
   // DoubleSided like the source data — photogrammetry has occasional flipped
   // faces, and it keeps walls visible when the camera gets pushed inside one.
-  const basic = new THREE.MeshBasicMaterial({ map, side: THREE.DoubleSide })
+  // toneMapped: false — the aerial survey is already a photograph; running it
+  // through ACES would wash out the baked-in daylight.
+  const basic = new THREE.MeshBasicMaterial({ map, side: THREE.DoubleSide, toneMapped: false })
   // Dispose the PBR material but keep its texture — the new material owns it.
   if (src instanceof THREE.MeshStandardMaterial) src.map = null
   ;(Array.isArray(material) ? material : [material]).forEach((m) => m.dispose())

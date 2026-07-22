@@ -4,6 +4,7 @@ import { ContactWindow } from "@/features/windows/ContactWindow"
 import { ResumeWindow } from "@/features/windows/ResumeWindow"
 import { TerminalWindow } from "@/features/windows/TerminalWindow"
 import { SnippetsWindow } from "@/features/windows/SnippetsWindow"
+import { DiaryWindow } from "@/features/windows/DiaryWindow"
 
 // Tuner and Chords pull in heavy deps (Tone.js, pitchy, chords-db), so they
 // are code-split: `import()` makes Vite emit a separate chunk per window,
@@ -28,6 +29,7 @@ import {
   TunerIcon,
   ChordIcon,
   CityIcon,
+  DiaryIcon,
   type IconProps,
 } from "./icons"
 
@@ -53,6 +55,14 @@ export const APPS: Record<string, AppDef> = {
     label: "Projects",
     width: 420,
     Content: ProjectsWindow,
+  },
+  diary: {
+    id: "diary",
+    title: "AI Diary",
+    Icon: DiaryIcon,
+    label: "AI Diary",
+    width: 420,
+    Content: DiaryWindow,
   },
   snippets: {
     id: "snippets",
@@ -119,6 +129,7 @@ export const APPS: Record<string, AppDef> = {
 // Order used for the desktop icons and dock.
 export const APP_ORDER = [
   "projects",
+  "diary",
   "snippets",
   "contact",
   "resume",

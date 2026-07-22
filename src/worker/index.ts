@@ -4,7 +4,7 @@ import { Hono } from "hono"
 // (globally available). Re-run that command after editing wrangler.jsonc
 // bindings (R2 / D1 / KV, etc.). MODELS is typed manually until the next
 // regeneration; the intersection stays harmless afterwards.
-const app = new Hono<{ Bindings: Env & { MODELS: R2Bucket } }>()
+const app = new Hono<{ Bindings: Env & { MODELS: R2Bucket; ADMIN_TOKEN?: string } }>()
 
 // Global safety net: never let an uncaught error crash the Worker; return
 // a clean JSON error for /api/* and fall back to assets otherwise.
@@ -88,8 +88,68 @@ app.delete("/api/sheets/:id", async (c) => {
   return c.json({ ok: true })
 })
 
+// ---- AI diary (Diary.app) ----
+// Daily markdown entries stored in the MODELS R2 bucket under diary/, one
+// object per day keyed diary/YYYY-MM-DD.md (uploaded by
+// scripts/diary/upload.sh or the PUT route below). Reads are public; writes
+// require the ADMIN_TOKEN secret, same scheme as chord sheets.
+
+const DIARY_PREFIX = "diary/"
+const DIARY_DATE = /^\d{4}-\d{2}-\d{2}$/
+
+app.use("/api/diary/*", async (c, next) => {
+  if (c.req.method === "GET") return next()
+  const token = c.req.header("Authorization")?.replace(/^Bearer\s+/i, "")
+  if (!c.env.ADMIN_TOKEN || token === c.env.ADMIN_TOKEN) return next()
+  return c.json({ ok: false, error: "unauthorized" }, 401)
+})
+
+// List entry dates, newest first. R2 list returns up to 1000 keys per page —
+// almost three years of daily entries — so pagination can wait.
+app.get("/api/diary", async (c) => {
+  const list = await c.env.MODELS.list({ prefix: DIARY_PREFIX })
+  const entries = list.objects
+    .filter((o) => /^\d{4}-\d{2}-\d{2}\.md$/.test(o.key.slice(DIARY_PREFIX.length)))
+    .map((o) => ({ date: o.key.slice(DIARY_PREFIX.length, -3), size: o.size }))
+    .sort((a, b) => b.date.localeCompare(a.date))
+  return c.json({ ok: true, entries })
+})
+
+app.get("/api/diary/:date", async (c) => {
+  const date = c.req.param("date")
+  if (!DIARY_DATE.test(date)) return c.json({ ok: false, error: "bad_date" }, 400)
+  const obj = await c.env.MODELS.get(`${DIARY_PREFIX}${date}.md`)
+  if (!obj) return c.json({ ok: false, error: "not_found" }, 404)
+  return c.text(await obj.text(), 200, {
+    "Content-Type": "text/markdown; charset=utf-8",
+    // Same-day entries get edited; keep the browser cache short.
+    "Cache-Control": "public, max-age=300",
+  })
+})
+
+app.put("/api/diary/:date", async (c) => {
+  const date = c.req.param("date")
+  if (!DIARY_DATE.test(date)) return c.json({ ok: false, error: "bad_date" }, 400)
+  const body = await c.req.text()
+  if (!body.trim() || body.length > 512 * 1024) {
+    return c.json({ ok: false, error: "bad_body" }, 400)
+  }
+  await c.env.MODELS.put(`${DIARY_PREFIX}${date}.md`, body, {
+    httpMetadata: { contentType: "text/markdown; charset=utf-8" },
+  })
+  return c.json({ ok: true, date, size: body.length })
+})
+
+app.delete("/api/diary/:date", async (c) => {
+  const date = c.req.param("date")
+  if (!DIARY_DATE.test(date)) return c.json({ ok: false, error: "bad_date" }, 400)
+  await c.env.MODELS.delete(`${DIARY_PREFIX}${date}.md`)
+  return c.json({ ok: true })
+})
+
 // ---- HK city tiles (CausewayBay.app) ----
-// ~90MB of photogrammetry GLBs live in R2 under hk-tiles/, deliberately kept
+// ~2GB of photogrammetry GLBs (4096px KTX2/UASTC textures) live in R2 under
+// hk-tiles/, deliberately kept
 // out of git and the static-asset build. In local dev this route never runs
 // (vite serves public/models/hk-tiles/); in production the missing asset
 // falls through to the Worker, which streams it from the bucket.
