@@ -7,16 +7,23 @@
 #   scripts/diary/upload.sh                         # upload today's $DIARY_DIR/YYYY-MM-DD.md
 #
 # Env:
-#   DIARY_DIR       folder holding the daily .md files (default ~/diary)
+#   DIARY_DIR       folder holding the daily .md files (required for the
+#                   no-argument form)
 #   DIARY_R2_BUCKET override the bucket (default daviddong-assets)
 set -eu
 
 bucket="${DIARY_R2_BUCKET:-daviddong-assets}"
 
 if [ "$#" -ge 1 ]; then
-  f="$1"
+  # "$*" re-joins an unquoted path that the shell split on spaces
+  # (e.g. .../Mobile Documents/... passed without quotes).
+  f="$*"
+elif [ -n "${DIARY_DIR:-}" ]; then
+  f="$DIARY_DIR/$(date +%F).md"
 else
-  f="${DIARY_DIR:-$HOME/diary}/$(date +%F).md"
+  echo "usage: $0 path/to/YYYY-MM-DD.md" >&2
+  echo "   or: DIARY_DIR=/path/to/folder $0   # uploads today's file" >&2
+  exit 1
 fi
 
 base="$(basename "$f")"
